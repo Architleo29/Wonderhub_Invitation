@@ -1,0 +1,23 @@
+# IDEs and editors
+.idea/
+.vscode/
+.cursor/
+.history/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Jetro and Agent configurations/temporary files
+.jetro/
+.agents/
+.windsurfrules
+.mcp.json
+AGENT.md
+CLAUDE.md
+
+# System Files
+Thumbs.db
+Ehthumbs.db
+Desktop.ini

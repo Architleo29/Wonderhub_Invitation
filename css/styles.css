@@ -1,0 +1,1263 @@
+/* ============================================================
+   WONDER HUB — Brand Reveal Website
+   Design System & Scene Styles
+   ============================================================ */
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&family=Parisienne&display=swap');
+
+/* ── Design Tokens ── */
+:root {
+  /* Color Palette */
+  --twilight-indigo:   #241B4E;
+  --deep-violet:       #4A2D7A;
+  --hub-magenta:       #B03A8C;
+  --antique-gold:      #D9B872;
+  --warm-ivory:        #F6ECD9;
+  --glow-pink:         #F5A9C9;
+  --near-black-indigo: #150F30;
+
+  /* Gold variants */
+  --gold-dim:   rgba(217, 184, 114, 0.4);
+  --gold-glow:  rgba(217, 184, 114, 0.7);
+  --gold-bright: #E8CB8A;
+
+  /* Brand gradient */
+  --brand-gradient: linear-gradient(135deg, var(--twilight-indigo) 0%, var(--deep-violet) 45%, var(--hub-magenta) 100%);
+  --brand-gradient-warm: linear-gradient(135deg, var(--deep-violet) 0%, var(--hub-magenta) 50%, var(--glow-pink) 100%);
+
+  /* Typography */
+  --font-display:  'Cormorant SC', serif;
+  --font-script:   'Playfair Display', serif;
+  --font-cursive:  'Parisienne', cursive;
+  --font-body:     'Cormorant Garamond', serif;
+  --font-utility:  'Jost', sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 5rem;
+
+  /* Transitions */
+  --ease-reveal:    cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth:    cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-in-back:   cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  --ease-out-back:  cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--warm-ivory);
+  background: var(--near-black-indigo);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Utility Classes ── */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   SCENE 1 — THE CURTAIN
+   ============================================================ */
+#scene-curtain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Curtain Panels */
+.curtain-panel {
+  position: absolute;
+  top: 0;
+  width: 52%;
+  height: 100%;
+  transition: transform 2s var(--ease-reveal);
+  will-change: transform;
+  overflow: hidden;
+}
+
+.curtain-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--brand-gradient);
+  z-index: 1;
+}
+
+.curtain-panel--left {
+  left: 0;
+  transform: translateX(0);
+}
+
+.curtain-panel--right {
+  right: 0;
+  transform: translateX(0);
+}
+
+/* Curtain fabric folds (gold linework) */
+.curtain-fold {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--gold-dim) 20%,
+    var(--antique-gold) 50%,
+    var(--gold-dim) 80%,
+    transparent 100%
+  );
+  opacity: 0.2;
+  z-index: 2;
+}
+
+/* Parted state */
+.curtain-panel--left.parted {
+  transform: translateX(-100%);
+  transition-duration: 1.8s;
+}
+
+.curtain-panel--right.parted {
+  transform: translateX(100%);
+  transition-delay: 0.1s;
+  transition-duration: 2.1s;
+}
+
+/* Rope Canvas */
+#rope-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  cursor: default;
+}
+
+#rope-canvas.cuttable {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M8 4 L16 16 L8 28' stroke='%23D9B872' stroke-width='2' fill='none'/%3E%3Cpath d='M24 4 L16 16 L24 28' stroke='%23D9B872' stroke-width='2' fill='none'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23D9B872'/%3E%3C/svg%3E") 16 16, crosshair;
+}
+
+/* Cut instruction */
+.cut-instruction {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  font-family: var(--font-utility);
+  font-size: 0.85rem;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--antique-gold);
+  opacity: 0;
+  animation: fadeInPulse 2s ease-in-out 1s forwards;
+}
+
+.cut-instruction span {
+  display: inline-block;
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+@keyframes fadeInPulse {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  100% { opacity: 0.8; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes gentlePulse {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+
+/* Scene hidden state */
+#scene-curtain.hidden {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease 2.5s;
+}
+
+/* ============================================================
+   SCENE 2 — SPOTLIGHTS & PARTICLES (overlay)
+   ============================================================ */
+#scene-reveal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 500;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+#scene-reveal.active {
+  opacity: 1;
+}
+
+/* Spotlight cones */
+.spotlight {
+  position: absolute;
+  width: 300px;
+  height: 100vh;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 1.5s var(--ease-smooth);
+  will-change: transform, opacity;
+}
+
+.spotlight::before {
+  content: '';
+  position: absolute;
+  top: -5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 110%;
+  background: linear-gradient(
+    to bottom,
+    rgba(217, 184, 114, 0.25) 0%,
+    rgba(245, 169, 201, 0.08) 60%,
+    transparent 100%
+  );
+  clip-path: polygon(35% 0%, 65% 0%, 100% 100%, 0% 100%);
+  filter: blur(8px);
+}
+
+.spotlight.active {
+  opacity: 1;
+  animation: spotlightFlicker 0.2s ease-in-out 3;
+}
+
+@keyframes spotlightFlicker {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+
+/* Archway glow */
+.archway-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 550px;
+  border-radius: 200px 200px 0 0;
+  background: radial-gradient(
+    ellipse at center 40%,
+    rgba(245, 169, 201, 0.15) 0%,
+    rgba(176, 58, 140, 0.08) 50%,
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 1.5s ease 0.5s;
+}
+
+#scene-reveal.active .archway-glow {
+  opacity: 1;
+}
+
+/* Gold particles */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--antique-gold);
+  box-shadow: 0 0 6px var(--gold-glow);
+  opacity: 0;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+@keyframes particleFloat {
+  0%   { opacity: 0; transform: translateY(0) scale(0.5); }
+  15%  { opacity: 1; }
+  85%  { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(-120vh) scale(0); }
+}
+
+/* ============================================================
+   MAIN CONTENT (post-reveal)
+   ============================================================ */
+#main-content {
+  position: relative;
+  z-index: 100;
+  background: var(--brand-gradient);
+  min-height: 100vh;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease 2s, transform 1s ease 2s;
+}
+
+#main-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Proscenium curtain frame (remains visible) */
+.proscenium-frame {
+  position: fixed;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  z-index: 200;
+  background: var(--brand-gradient);
+  opacity: 0;
+  transition: opacity 1s ease 2.2s;
+  pointer-events: none;
+}
+
+.proscenium-frame--left  { left: 0;  }
+.proscenium-frame--right { right: 0; }
+
+.proscenium-frame::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--gold-dim), var(--antique-gold), var(--gold-dim), transparent);
+}
+
+.proscenium-frame--left::after  { right: 0; }
+.proscenium-frame--right::after { left: 0;  }
+
+.proscenium-frame.visible { opacity: 1; }
+
+/* ============================================================
+   SCENE 3 — ANNOUNCEMENT
+   ============================================================ */
+#scene-announcement {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  overflow: hidden;
+}
+
+/* Background gradient overlay */
+#scene-announcement::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center 30%,
+    rgba(245, 169, 201, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Eyebrow */
+.announcement-eyebrow {
+  font-family: var(--font-utility);
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--antique-gold);
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.announcement-eyebrow.animate-in {
+  animation: slideUp 0.8s var(--ease-smooth) forwards;
+}
+
+/* Headline */
+.announcement-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6.5vw, 4.8rem);
+  font-weight: 600;
+  color: var(--warm-ivory);
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.announcement-headline.animate-in {
+  animation: slideUp 0.8s var(--ease-smooth) 0.2s forwards;
+}
+
+/* Supporting line */
+.announcement-body {
+  font-family: var(--font-body);
+  font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+  font-weight: 400;
+  color: var(--warm-ivory);
+  max-width: 800px;
+  line-height: 1.7;
+  margin-bottom: var(--space-sm);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.announcement-body.animate-in {
+  animation: slideUp 0.8s var(--ease-smooth) 0.4s forwards;
+}
+
+/* Script flourish */
+.announcement-script {
+  font-family: var(--font-cursive);
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  color: var(--antique-gold);
+  margin-bottom: var(--space-xl);
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.announcement-script.animate-in {
+  animation: slideUp 0.8s var(--ease-smooth) 0.55s forwards;
+}
+
+/* Date */
+.announcement-date {
+  font-family: var(--font-utility);
+  font-size: clamp(1.2rem, 2.8vw, 1.8rem);
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: var(--warm-ivory);
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.announcement-date.animate-in {
+  animation: slideUp 0.8s var(--ease-smooth) 0.7s forwards;
+}
+
+/* Countdown */
+.countdown {
+  display: flex;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.countdown.animate-in {
+  animation: slideUp 0.8s var(--ease-smooth) 0.85s forwards;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.countdown-value {
+  font-family: var(--font-utility);
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--antique-gold);
+  min-width: 2ch;
+}
+
+.countdown-label {
+  font-family: var(--font-utility);
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+.countdown-separator {
+  font-family: var(--font-utility);
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-weight: 200;
+  color: var(--gold-dim);
+  align-self: flex-start;
+  line-height: 1;
+}
+
+/* Gold thread node */
+.thread-node {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--antique-gold);
+  box-shadow: 0 0 12px var(--gold-glow), 0 0 24px rgba(217, 184, 114, 0.2);
+  margin: var(--space-md) auto;
+}
+
+/* Scroll Down Prompt Indicator */
+.scroll-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: var(--space-xl) auto var(--space-md);
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.scroll-prompt.animate-in {
+  animation: slideUp 0.8s var(--ease-smooth) 1.05s forwards;
+}
+
+.scroll-prompt-text {
+  font-family: var(--font-utility);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gold-dim);
+}
+
+.scroll-prompt-mouse {
+  width: 20px;
+  height: 35px;
+  border: 2px solid var(--gold-dim);
+  border-radius: 20px;
+  position: relative;
+}
+
+.scroll-prompt-wheel {
+  width: 4px;
+  height: 8px;
+  background-color: var(--antique-gold);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheelScroll 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollWheelScroll {
+  0% {
+    top: 6px;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  60% {
+    top: 18px;
+    opacity: 0;
+  }
+  100% {
+    top: 6px;
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   SCENE 4 — THE JOURNEY (Scrollytelling)
+   ============================================================ */
+#scene-journey {
+  position: relative;
+  overflow: hidden;
+}
+
+.journey-header {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg) var(--space-xl);
+}
+
+.journey-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5.5vw, 3.8rem);
+  font-weight: 600;
+  color: var(--antique-gold);
+  letter-spacing: 0.08em;
+}
+
+/* Journey scroll container */
+.journey-scroll {
+  position: relative;
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: auto;
+}
+
+/* Individual milestone */
+.journey-milestone {
+  position: relative;
+  min-height: 65vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  opacity: 0.15;
+  transform: scale(0.95);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.journey-milestone.in-view {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.milestone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 650px;
+  gap: var(--space-lg);
+}
+
+/* Milestone illustration container */
+.milestone-illustration {
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s, background 0.6s ease, box-shadow 0.6s ease;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+}
+
+.journey-milestone.in-view .milestone-illustration {
+  opacity: 1;
+  transform: translateY(0);
+  background: radial-gradient(circle, rgba(217, 184, 114, 0.15) 0%, rgba(217, 184, 114, 0.06) 50%, transparent 75%);
+  box-shadow: 0 0 40px rgba(217, 184, 114, 0.18), 0 0 80px rgba(217, 184, 114, 0.08);
+}
+
+.milestone-illustration svg {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Milestone label */
+.milestone-label {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 600;
+  color: var(--antique-gold);
+  letter-spacing: 0.1em;
+}
+
+.milestone-sublabel {
+  font-family: var(--font-body);
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  color: var(--warm-ivory);
+  opacity: 0.7;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+/* Gold thread line — hidden per user request */
+.journey-thread {
+  display: none;
+}
+
+.journey-thread-line {
+  display: none;
+}
+
+.journey-thread-line.drawn {
+  display: none;
+}
+
+/* Thread node markers — hidden per user request */
+.journey-node {
+  display: none;
+}
+
+.journey-node.lit {
+  display: none;
+}
+
+/* Archway at journey end */
+.journey-archway {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  scroll-snap-align: center;
+}
+
+.archway-svg {
+  width: 200px;
+  height: 280px;
+  margin-bottom: var(--space-xl);
+  filter: drop-shadow(0 0 30px rgba(245, 169, 201, 0.3));
+}
+
+/* ============================================================
+   SCENE 5 — LOGO REVEAL
+   ============================================================ */
+#scene-logo {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  overflow: hidden;
+}
+
+/* Reveal button */
+.reveal-btn {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--antique-gold);
+  background: transparent;
+  border: 2px solid var(--antique-gold);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.reveal-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--antique-gold);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.4s ease;
+  z-index: -1;
+}
+
+.reveal-btn:hover {
+  color: var(--near-black-indigo);
+  box-shadow: 0 0 20px var(--gold-glow), 0 0 40px rgba(217, 184, 114, 0.15);
+}
+
+.reveal-btn:hover::before {
+  transform: scaleX(1);
+}
+
+.reveal-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
+  transition: all 0.5s ease;
+}
+
+/* Logo container */
+.logo-container {
+  position: relative;
+  width: min(80vw, 400px);
+  height: min(80vw, 400px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.6s ease, transform 0.8s var(--ease-out-back);
+}
+
+.logo-container.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Logo using the actual PNG */
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 40px rgba(217, 184, 114, 0.3));
+  transition: opacity 1.2s ease;
+}
+
+.logo-image.visible {
+  opacity: 1;
+}
+
+/* SVG overlay for trace animation */
+.logo-trace-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Shimmer effect */
+.logo-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(217, 184, 114, 0.25) 48%,
+    rgba(232, 203, 138, 0.4) 50%,
+    rgba(217, 184, 114, 0.25) 52%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.logo-shimmer.sweep {
+  opacity: 1;
+  animation: shimmerSweep 1.5s ease-in-out forwards;
+}
+
+@keyframes shimmerSweep {
+  0%   { background-position: 200% center; opacity: 1; }
+  80%  { opacity: 1; }
+  100% { background-position: -200% center; opacity: 0; }
+}
+
+/* Logo tagline */
+.logo-tagline {
+  font-family: var(--font-cursive);
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  color: var(--antique-gold);
+  margin-top: var(--space-lg);
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.logo-tagline.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Store details & experience hook styling */
+.store-details {
+  margin-top: var(--space-xl);
+  max-width: 700px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s var(--ease-smooth), transform 1s var(--ease-smooth);
+}
+
+.store-details.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.store-hook {
+  font-family: var(--font-cursive);
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  color: var(--antique-gold);
+  margin-bottom: var(--space-xs);
+}
+
+.store-location {
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+  color: var(--warm-ivory);
+  line-height: 1.6;
+}
+
+.store-location span {
+  color: var(--antique-gold);
+  font-weight: 600;
+}
+
+.store-hours {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  color: var(--warm-ivory);
+  opacity: 0.85;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: var(--space-xs);
+}
+
+.store-hours span {
+  color: var(--antique-gold);
+}
+
+/* ============================================================
+   SCENE 6 — SOCIAL FOOTER
+   ============================================================ */
+#scene-social {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg) var(--space-xl);
+  gap: var(--space-xl);
+}
+
+/* Divider line */
+#scene-social::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 1px;
+  background: var(--gold-dim);
+}
+
+.social-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--warm-ivory);
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.social-subtext {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--warm-ivory);
+  opacity: 0.6;
+}
+
+/* Instagram button */
+.instagram-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-utility);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--antique-gold);
+  border: 1.5px solid var(--antique-gold);
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  transition: color 0.4s ease, background 0.4s ease;
+}
+
+.instagram-btn:hover {
+  background: var(--antique-gold);
+  color: var(--twilight-indigo);
+}
+
+.instagram-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Email capture */
+.email-capture {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 420px;
+}
+
+.email-capture-label {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--warm-ivory);
+  opacity: 0.7;
+}
+
+.email-capture-form {
+  display: flex;
+  width: 100%;
+  border: 1px solid var(--gold-dim);
+  border-radius: 50px;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.email-capture-form:focus-within {
+  border-color: var(--antique-gold);
+  box-shadow: 0 0 15px rgba(217, 184, 114, 0.1);
+}
+
+.email-capture-input {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: none;
+  font-family: var(--font-utility);
+  font-size: 0.85rem;
+  color: var(--warm-ivory);
+  outline: none;
+}
+
+.email-capture-input::placeholder {
+  color: var(--gold-dim);
+  font-weight: 300;
+}
+
+.email-capture-submit {
+  padding: 0.75rem 1.5rem;
+  background: var(--antique-gold);
+  border: none;
+  color: var(--near-black-indigo);
+  font-family: var(--font-utility);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.email-capture-submit:hover {
+  background: var(--gold-bright);
+}
+
+/* Footer brand mark */
+.footer-brand {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(217, 184, 114, 0.1);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.footer-brand-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--antique-gold);
+  opacity: 0.5;
+}
+
+/* ============================================================
+   AUDIO TOGGLE
+   ============================================================ */
+.audio-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-dim);
+  background: rgba(21, 15, 48, 0.8);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease, transform 0.2s ease;
+}
+
+.audio-toggle:hover {
+  border-color: var(--antique-gold);
+  transform: scale(1.1);
+}
+
+.audio-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--antique-gold);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .proscenium-frame {
+    width: 30px;
+  }
+
+  .countdown {
+    gap: var(--space-md);
+  }
+
+  .milestone-illustration {
+    width: 160px;
+    height: 160px;
+  }
+
+  .journey-milestone {
+    min-height: 60vh;
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .reveal-btn {
+    padding: 0.8rem 1.8rem;
+    font-size: 0.85rem;
+  }
+
+  .logo-container {
+    width: min(85vw, 300px);
+    height: min(85vw, 300px);
+  }
+
+  .email-capture-form {
+    flex-direction: column;
+    border-radius: 12px;
+  }
+
+  .email-capture-input {
+    border-bottom: 1px solid var(--gold-dim);
+  }
+
+  .email-capture-submit {
+    border-radius: 0 0 11px 11px;
+    padding: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .proscenium-frame {
+    width: 12px;
+  }
+
+  /* Safe padding for content on small mobile viewports */
+  #main-content section {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .cut-instruction {
+    font-size: 0.75rem;
+    bottom: 15%;
+  }
+
+  /* Prevent cursive letter cuts */
+  .announcement-script {
+    font-size: 1.6rem !important;
+    line-height: 1.5 !important;
+    padding-bottom: 10px !important;
+    overflow: visible !important;
+  }
+
+  .store-hook {
+    font-size: 1.7rem !important;
+    line-height: 1.5 !important;
+    padding-bottom: 10px !important;
+    overflow: visible !important;
+  }
+
+  /* Announcement & Headline Mobile Tweak */
+  .announcement-eyebrow {
+    font-size: 0.85rem !important;
+    letter-spacing: 0.3em;
+  }
+
+  .announcement-headline {
+    font-size: clamp(2rem, 8vw, 2.8rem) !important;
+    line-height: 1.35 !important;
+  }
+
+  .announcement-body {
+    font-size: 1.15rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Countdown mobile fitting */
+  .countdown {
+    gap: var(--space-sm) !important;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .countdown-value {
+    font-size: 1.8rem !important;
+  }
+
+  .countdown-separator {
+    font-size: 1.8rem !important;
+  }
+
+  .countdown-label {
+    font-size: 0.7rem !important;
+    letter-spacing: 0.2em;
+  }
+
+  /* Journey Milestone Mobile Scaling */
+  .milestone-label {
+    font-size: 1.5rem !important;
+  }
+
+  .milestone-sublabel {
+    font-size: 1.05rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Store Details Mobile Scaling */
+  .store-location {
+    font-size: 1.1rem !important;
+  }
+
+  .store-hours {
+    font-size: 0.95rem !important;
+  }
+}

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wonder Hub — Grand Opening Soon</title>
+  <meta name="description" content="A Journey From Sari to Many More. Wonder Hub — sarees, jewelry, gifts, and a community of women who love the Hub. Grand Opening 23rd July 2026.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Wonder Hub — Grand Opening Soon">
+  <meta property="og:description" content="A Journey From Sari to Many More. One tradition, endlessly reimagined.">
+  <meta property="og:type" content="website">
+
+  <!-- Preload fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Favicon (gold-on-indigo placeholder) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23241B4E' stroke='%23D9B872' stroke-width='1'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='serif' font-size='14' fill='%23D9B872'%3EW%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <!-- ============================================================
+       SCENE 1 — THE CURTAIN
+       ============================================================ -->
+  <section id="scene-curtain" aria-label="Curtain reveal">
+    <!-- Left curtain panel -->
+    <div class="curtain-panel curtain-panel--left">
+      <div class="curtain-fold" style="left: 20%;"></div>
+      <div class="curtain-fold" style="left: 40%;"></div>
+      <div class="curtain-fold" style="left: 60%;"></div>
+      <div class="curtain-fold" style="left: 80%;"></div>
+    </div>
+
+    <!-- Right curtain panel -->
+    <div class="curtain-panel curtain-panel--right">
+      <div class="curtain-fold" style="left: 20%;"></div>
+      <div class="curtain-fold" style="left: 40%;"></div>
+      <div class="curtain-fold" style="left: 60%;"></div>
+      <div class="curtain-fold" style="left: 80%;"></div>
+    </div>
+
+    <!-- Rope (canvas-rendered) -->
+    <canvas id="rope-canvas" aria-hidden="true"></canvas>
+
+    <!-- Cut instruction -->
+    <div class="cut-instruction" aria-live="polite">
+      <span>Drag across the thread to cut</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 2 — SPOTLIGHT REVEAL (overlay)
+       ============================================================ -->
+  <section id="scene-reveal" aria-label="Spotlight reveal">
+    <div class="archway-glow"></div>
+  </section>
+
+  <!-- Proscenium curtain frame (stays visible post-reveal) -->
+  <div class="proscenium-frame proscenium-frame--left" aria-hidden="true"></div>
+  <div class="proscenium-frame proscenium-frame--right" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       MAIN CONTENT (revealed after curtain parts)
+       ============================================================ -->
+  <main id="main-content">
+    <!-- ============================================================
+         SCENE 3 — LAUNCH ANNOUNCEMENT
+         ============================================================ -->
+    <section id="scene-announcement" aria-label="Launch announcement">
+      <div class="thread-node"></div>
+
+      <p class="announcement-eyebrow">Grand Opening Soon</p>
+
+      <h1 class="announcement-headline">A Journey From Sari to Many More</h1>
+
+      <p class="announcement-body">
+        One tradition, endlessly reimagined — sarees, jewelry, gifts, and a community of women who love the Hub. Every thread you see brought us here.
+      </p>
+
+      <p class="announcement-script">to create the hub ♡</p>
+
+      <p class="announcement-date">Opening 23rd July 2026</p>
+
+      <div class="countdown" role="timer" aria-label="Countdown to opening day">
+        <div class="countdown-unit">
+          <span class="countdown-value" id="countdown-days">--</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <span class="countdown-separator">:</span>
+        <div class="countdown-unit">
+          <span class="countdown-value" id="countdown-hours">--</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <span class="countdown-separator">:</span>
+        <div class="countdown-unit">
+          <span class="countdown-value" id="countdown-minutes">--</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+      </div>
+
+      <!-- Scroll Down Indicator -->
+      <div class="scroll-prompt" id="scroll-prompt" aria-hidden="true">
+        <span class="scroll-prompt-text">Scroll to explore</span>
+        <div class="scroll-prompt-mouse">
+          <div class="scroll-prompt-wheel"></div>
+        </div>
+      </div>
+
+      <div class="thread-node"></div>
+    </section>
+
+    <!-- ============================================================
+         SCENE 4 — THE JOURNEY (Scrollytelling)
+         ============================================================ -->
+    <section id="scene-journey" aria-label="The Wonder Hub journey">
+      <div class="journey-header">
+        <h2>The Journey</h2>
+      </div>
+
+      <div class="journey-scroll">
+        <!-- Gold thread vertical line -->
+        <div class="journey-thread" aria-hidden="true">
+          <div class="journey-thread-line"></div>
+        </div>
+
+        <!-- Milestone 1: A Tradition Begins -->
+        <div class="journey-milestone" data-index="0">
+          <div class="journey-node" style="top: 15%;" aria-hidden="true"></div>
+          <div class="milestone-content">
+            <div class="milestone-illustration">
+              <svg viewBox="0 0 200 200" fill="none" stroke="#D9B872" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Woman in saree -->
+                <circle cx="100" cy="45" r="12"/>
+                <path d="M88 57 C85 70, 80 90, 78 110 Q76 130, 85 155 L115 155 Q120 130, 118 110 C116 90, 111 70, 108 57"/>
+                <!-- Saree drape flowing -->
+                <path d="M78 80 C65 85, 55 95, 50 115 Q45 135, 55 155"/>
+                <path d="M75 90 C62 95, 52 105, 48 125 Q44 140, 52 158"/>
+                <!-- Arm with fabric -->
+                <path d="M88 70 C75 68, 60 72, 50 80 Q42 88, 40 100"/>
+                <path d="M40 100 C38 108, 42 115, 48 118"/>
+                <!-- Decorative border on saree -->
+                <path d="M80 150 C85 148, 90 150, 95 148 C100 150, 105 148, 110 150" stroke-dasharray="2 3"/>
+                <path d="M78 145 C83 143, 88 145, 93 143 C98 145, 103 143, 108 145" stroke-dasharray="2 3"/>
+              </svg>
+            </div>
+            <h3 class="milestone-label">A Tradition Begins</h3>
+            <p class="milestone-sublabel">Where the love for the saree was born — a thread connecting generations of grace</p>
+          </div>
+        </div>
+
+        <!-- Milestone 2: Creations Expand -->
+        <div class="journey-milestone" data-index="1">
+          <div class="journey-node" style="top: 50%;" aria-hidden="true"></div>
+          <div class="milestone-content">
+            <div class="milestone-illustration">
+              <svg viewBox="0 0 200 200" fill="none" stroke="#D9B872" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Laptop -->
+                <rect x="25" y="45" width="90" height="60" rx="3"/>
+                <rect x="30" y="50" width="80" height="45" rx="1"/>
+                <!-- Screen content: shopping cart -->
+                <path d="M45 65 L55 65 L60 85 L80 85 L85 70 L60 70"/>
+                <circle cx="65" cy="90" r="2"/>
+                <circle cx="78" cy="90" r="2"/>
+                <!-- Laptop base -->
+                <path d="M20 105 L120 105 L115 110 L25 110 Z"/>
+                <!-- Jewelry items -->
+                <!-- Necklace -->
+                <path d="M145 50 C130 55, 125 70, 130 80 C135 90, 155 90, 160 80 C165 70, 160 55, 145 50"/>
+                <circle cx="145" cy="82" r="5"/>
+                <circle cx="145" cy="82" r="2"/>
+                <!-- Earring -->
+                <path d="M170 55 L170 65 L165 75 L175 75 L170 65"/>
+                <!-- Gift box -->
+                <rect x="130" y="105" width="45" height="35" rx="2"/>
+                <line x1="152" y1="105" x2="152" y2="140"/>
+                <path d="M130 115 L175 115"/>
+                <!-- Bow -->
+                <path d="M145 105 C142 100, 140 95, 145 93 C150 95, 148 100, 145 105"/>
+                <path d="M160 105 C157 100, 160 95, 165 93 C168 95, 163 100, 160 105"/>
+              </svg>
+            </div>
+            <h3 class="milestone-label">Creations Expand</h3>
+            <p class="milestone-sublabel">Beyond sarees — jewelry, gifts, and digital storefronts bringing creations to the world</p>
+          </div>
+        </div>
+
+        <!-- Milestone 3: The Hub Is Born -->
+        <div class="journey-milestone" data-index="2">
+          <div class="journey-node" style="top: 85%;" aria-hidden="true"></div>
+          <div class="milestone-content">
+            <div class="milestone-illustration">
+              <svg viewBox="0 0 200 200" fill="none" stroke="#D9B872" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Glowing archway -->
+                <path d="M60 170 L60 70 Q60 30, 100 25 Q140 30, 140 70 L140 170"/>
+                <path d="M55 170 L55 68 Q55 25, 100 18 Q145 25, 145 68 L145 170"/>
+                <!-- Inner glow lines -->
+                <path d="M70 170 L70 75 Q70 40, 100 35 Q130 40, 130 75 L130 170" opacity="0.4"/>
+                <path d="M80 170 L80 80 Q80 50, 100 45 Q120 50, 120 80 L120 170" opacity="0.2"/>
+                <!-- Light rays from archway -->
+                <line x1="100" y1="30" x2="100" y2="5" stroke-dasharray="2 3" opacity="0.5"/>
+                <line x1="80" y1="35" x2="70" y2="10" stroke-dasharray="2 3" opacity="0.3"/>
+                <line x1="120" y1="35" x2="130" y2="10" stroke-dasharray="2 3" opacity="0.3"/>
+                <!-- Steps -->
+                <line x1="55" y1="170" x2="145" y2="170"/>
+                <line x1="50" y1="178" x2="150" y2="178"/>
+                <line x1="45" y1="186" x2="155" y2="186"/>
+                <!-- Sparkles around the arch -->
+                <circle cx="50" cy="50" r="1.5" opacity="0.6"/>
+                <circle cx="150" cy="50" r="1.5" opacity="0.6"/>
+                <circle cx="100" cy="10" r="2" opacity="0.8"/>
+                <circle cx="65" cy="25" r="1" opacity="0.4"/>
+                <circle cx="135" cy="25" r="1" opacity="0.4"/>
+              </svg>
+            </div>
+            <h3 class="milestone-label">The Hub Is Born</h3>
+            <p class="milestone-sublabel">Every thread, every dream, every connection leads here — welcome to Wonder Hub</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SCENE 5 — IDENTITY REVEAL
+         ============================================================ -->
+    <section id="scene-logo" aria-label="Brand identity reveal">
+      <button class="reveal-btn" id="reveal-btn" type="button">
+        Reveal Our Identity
+      </button>
+
+      <div class="logo-container">
+        <img class="logo-image" 
+             src="wonderhub_logo_preview.png" 
+             alt="Wonder Hub — circular badge logo with Wh monogram, laurel wreath, and Love the Hub tagline"
+             width="400" height="400">
+        <div class="logo-shimmer" aria-hidden="true"></div>
+      </div>
+
+      <p class="logo-tagline">Love the Hub</p>
+
+      <!-- Store Details & Experience Hook -->
+      <div class="store-details" id="store-details">
+        <p class="store-hook">Experience the magic of handcrafted elegance</p>
+        <p class="store-location">Step into our brand-new store near <span>Garia 6 No. Bus Stand, Kolkata - 700047</span></p>
+        <p class="store-hours">Open Daily: <span>10:00 AM – 8:00 PM</span></p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SCENE 6 — SOCIAL CONNECTION
+         ============================================================ -->
+    <section id="scene-social" aria-label="Connect with Wonder Hub">
+      <h2 class="social-heading">Follow the journey before it begins.</h2>
+      
+      <p class="social-subtext">Be the first through the door.</p>
+
+      <a href="#" class="instagram-btn" target="_blank" rel="noopener noreferrer" aria-label="Follow Wonder Hub on Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+        </svg>
+        Follow on Instagram
+      </a>
+
+      <div class="email-capture">
+        <p class="email-capture-label">Or be notified when we open our doors</p>
+        <form class="email-capture-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent = '✓ Noted'; this.querySelector('input').disabled = true;">
+          <input type="email" class="email-capture-input" placeholder="Your email address" required aria-label="Email address">
+          <button type="submit" class="email-capture-submit">Notify Me</button>
+        </form>
+      </div>
+
+      <footer class="footer-brand">
+        <p class="footer-brand-name">Wonder Hub</p>
+      </footer>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       AUDIO TOGGLE
+       ============================================================ -->
+  <button class="audio-toggle" aria-label="Toggle sound" title="Toggle sound">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+      <line x1="23" y1="9" x2="17" y2="15"/>
+      <line x1="17" y1="9" x2="23" y2="15"/>
+    </svg>
+  </button>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
