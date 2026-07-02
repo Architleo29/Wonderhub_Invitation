@@ -24,6 +24,10 @@ class WonderHubApp {
   }
 
   async init() {
+    // Initialize countdown immediately to resolve "--" hyphens before reveal
+    this.countdown = new Countdown();
+    this.countdown.update();
+
     // Wait for fonts to load
     await this.preloadFonts();
 
@@ -87,14 +91,21 @@ class WonderHubApp {
 
     main.classList.add('visible');
 
+    // Smooth scroll to announcement section so user is anchored correctly
+    const announcement = document.getElementById('scene-announcement');
+    if (announcement) {
+      announcement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     // Trigger announcement animations
     setTimeout(() => {
       this.animateAnnouncement();
     }, 1500);
 
-    // Start countdown
-    this.countdown = new Countdown();
-    this.countdown.start();
+    // Start countdown updates
+    if (this.countdown) {
+      this.countdown.start();
+    }
 
     // Initialize journey scrollytelling
     setTimeout(() => {

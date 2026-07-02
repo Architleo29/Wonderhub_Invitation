@@ -24,6 +24,11 @@ export class LogoReveal {
     // Hide the button
     this.btn.classList.add('hidden');
 
+    // Smooth scroll to the logo container so it's centered in the viewport
+    if (this.container) {
+      this.container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
     // Show logo container
     setTimeout(() => {
       this.container.classList.add('revealed');
@@ -80,10 +85,11 @@ export class LogoReveal {
       }
     }, 3500);
 
-    // Step 5: Show store details (after tagline)
+    // Step 5: Show store details (after tagline) and scroll to center it
     setTimeout(() => {
       if (this.storeDetails) {
         this.storeDetails.classList.add('visible');
+        this.storeDetails.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }, 4200);
 

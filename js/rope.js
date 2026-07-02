@@ -31,10 +31,14 @@ export class Rope {
     this.bottomHalf = [];
     this.postCutTime = 0;
 
+    // Idle prompt animation
+    this.idleTimeout = null;
+
     this.resizeCanvas();
     this.initPoints();
     this.bindEvents();
     this.animate();
+    this.resetIdleTimer();
   }
 
   resizeCanvas() {
@@ -78,7 +82,7 @@ export class Rope {
     this.canvas.addEventListener('touchmove', (e) => {
       e.preventDefault();
       const t = e.touches[0];
-      this.onPointerMove(t.clientX, t.clientY, hitZoneWidth * 1.5);
+      this.onPointerMove(t.clientX, t.clientY, hitZoneWidth * 2.5);
     }, { passive: false });
 
     this.canvas.addEventListener('touchend', () => this.onPointerUp());
@@ -91,6 +95,7 @@ export class Rope {
 
   onPointerDown(x, y) {
     if (this.cut) return;
+    this.resetIdleTimer();
     this.isDragging = true;
     this.dragStart = { x, y };
     this.dragCurrent = { x, y };
@@ -99,6 +104,7 @@ export class Rope {
 
   onPointerMove(x, y, hitZoneWidth) {
     if (this.cut) return;
+    this.resetIdleTimer();
 
     // Update cursor style based on proximity
     const cx = this.canvas.width / 2;
@@ -112,23 +118,29 @@ export class Rope {
     this.dragCurrent = { x, y };
     this.dragTrail.push({ x, y });
 
-    // Check for cut: has the drag path crossed the rope?
+    // Check for cut: has the drag path crossed the rope or swiped very close to it?
     if (this.dragTrail.length >= 2) {
       const prev = this.dragTrail[this.dragTrail.length - 2];
       const curr = this.dragTrail[this.dragTrail.length - 1];
 
-      // Check if drag crosses the rope line
+      // Check if mobile device
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const threshold = isMobile ? 40 : 15;
+
       for (let i = 1; i < this.points.length; i++) {
         const p1 = this.points[i - 1];
         const p2 = this.points[i];
 
-        if (this.lineSegmentsIntersect(prev.x, prev.y, curr.x, curr.y, p1.x, p1.y, p2.x, p2.y)) {
+        const intersects = this.lineSegmentsIntersect(prev.x, prev.y, curr.x, curr.y, p1.x, p1.y, p2.x, p2.y);
+        const closeToSegment = this.distToSegment(curr.x, curr.y, p1.x, p1.y, p2.x, p2.y) < threshold;
+
+        if (intersects || closeToSegment) {
           // Calculate drag velocity
           const dx = curr.x - prev.x;
           const dy = curr.y - prev.y;
           const velocity = Math.sqrt(dx * dx + dy * dy);
 
-          if (velocity > 5) { // Minimum velocity threshold
+          if (velocity > 3) { // Lower threshold to be highly forgiving
             this.performCut(i);
             return;
           }
@@ -138,6 +150,7 @@ export class Rope {
   }
 
   onPointerUp() {
+    this.resetIdleTimer();
     this.isDragging = false;
     this.dragTrail = [];
   }
@@ -155,6 +168,7 @@ export class Rope {
   performCut(index) {
     if (this.cut) return;
     this.cut = true;
+    clearTimeout(this.idleTimeout);
     this.cutIndex = index;
     this.cutTime = performance.now();
 
@@ -362,6 +376,39 @@ export class Rope {
 
   destroy() {
     this.cut = true;
+    clearTimeout(this.idleTimeout);
     this.postCutTime = 10; // Force stop
+  }
+
+  distToSegment(px, py, x1, y1, x2, y2) {
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const l2 = dx * dx + dy * dy;
+    if (l2 === 0) return Math.sqrt((px - x1) ** 2 + (py - y1) ** 2);
+    let t = ((px - x1) * dx + (py - y1) * dy) / l2;
+    t = Math.max(0, Math.min(1, t));
+    return Math.sqrt((px - (x1 + t * dx)) ** 2 + (py - (y1 + t * dy)) ** 2);
+  }
+
+  pluck() {
+    if (this.cut) return;
+    const mid = Math.floor(this.points.length / 2);
+    const direction = Math.random() > 0.5 ? 1 : -1;
+    // Apply horizontal impulse to middle points to create a wave/bounce
+    for (let i = -2; i <= 2; i++) {
+      const idx = mid + i;
+      if (idx > 0 && idx < this.points.length - 1) {
+        this.points[idx].oldX = this.points[idx].x - direction * (12 - Math.abs(i) * 3);
+      }
+    }
+  }
+
+  resetIdleTimer() {
+    clearTimeout(this.idleTimeout);
+    if (this.cut) return;
+    this.idleTimeout = setTimeout(() => {
+      this.pluck();
+      this.resetIdleTimer();
+    }, 3000); // 3 seconds of inactivity triggers a pluck
   }
 }
