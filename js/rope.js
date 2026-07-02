@@ -158,6 +158,10 @@ export class Rope {
     this.cutIndex = index;
     this.cutTime = performance.now();
 
+    // Disable canvas pointer events so it doesn't block clicks or keep custom cursor
+    this.canvas.style.pointerEvents = 'none';
+    this.canvas.classList.remove('cuttable');
+
     // Split into top and bottom halves
     this.topHalf = this.points.slice(0, index).map(p => ({ ...p }));
     this.bottomHalf = this.points.slice(index).map(p => ({ ...p, pinned: false }));

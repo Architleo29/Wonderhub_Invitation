@@ -206,7 +206,14 @@ body {
 #scene-curtain.hidden {
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.5s ease 2.5s;
+  transition: opacity 0.5s ease;
+}
+
+.cut-instruction.hidden {
+  animation: none !important;
+  opacity: 0 !important;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 /* ============================================================

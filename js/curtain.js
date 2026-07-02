@@ -17,8 +17,7 @@ export class Curtain {
 
     // Hide the instruction
     if (this.instruction) {
-      this.instruction.style.opacity = '0';
-      this.instruction.style.transition = 'opacity 0.3s ease';
+      this.instruction.classList.add('hidden');
     }
 
     // Part the curtains with asymmetric timing
