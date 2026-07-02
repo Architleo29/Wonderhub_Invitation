@@ -897,6 +897,7 @@ body {
   text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-sm);
   opacity: 0;
   transform: translateY(20px);
@@ -939,6 +940,58 @@ body {
 
 .store-hours span {
   color: var(--antique-gold);
+}
+
+/* Store Map Location Embed styling */
+.store-map {
+  position: relative;
+  width: 85%;
+  max-width: 320px;
+  height: 200px;
+  margin: var(--space-lg) auto 0;
+  border: 1.5px solid rgba(217, 184, 114, 0.3);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(21, 15, 48, 0.6),
+    0 0 0 1px rgba(217, 184, 114, 0.06);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+  will-change: transform;
+}
+
+.store-map:hover {
+  border-color: var(--antique-gold);
+  box-shadow:
+    0 12px 36px rgba(217, 184, 114, 0.18),
+    0 0 0 1px rgba(217, 184, 114, 0.12);
+  transform: translateY(-2px);
+}
+
+.store-map iframe {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  /* Full colour map — no grayscale filter */
+}
+
+/* Custom Bouncing Red Pin styling */
+.map-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 6px rgba(255, 59, 48, 0.55))
+          drop-shadow(0 0 10px rgba(255, 59, 48, 0.3));
+  animation: pinBounce 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes pinBounce {
+  0%   { transform: translate(-50%, -100%); }
+  100% { transform: translate(-50%, -114%); }
 }
 
 /* ============================================================
