@@ -8,6 +8,7 @@ export class Curtain {
     this.rightPanel = document.querySelector('.curtain-panel--right');
     this.scene = document.getElementById('scene-curtain');
     this.instruction = document.querySelector('.cut-instruction');
+    this.heading = document.querySelector('.curtain-heading');
     this.isParted = false;
   }
 
@@ -15,9 +16,12 @@ export class Curtain {
     if (this.isParted) return;
     this.isParted = true;
 
-    // Hide the instruction
+    // Hide the instruction and heading
     if (this.instruction) {
       this.instruction.classList.add('hidden');
+    }
+    if (this.heading) {
+      this.heading.classList.add('hidden');
     }
 
     // Part the curtains with asymmetric timing

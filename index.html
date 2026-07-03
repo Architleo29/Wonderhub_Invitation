@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=8">
 
   <!-- Favicon (gold-on-indigo placeholder) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23241B4E' stroke='%23D9B872' stroke-width='1'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='serif' font-size='14' fill='%23D9B872'%3EW%3C/text%3E%3C/svg%3E">
@@ -45,9 +45,23 @@
     <!-- Rope (canvas-rendered) -->
     <canvas id="rope-canvas" aria-hidden="true"></canvas>
 
+    <!-- Curtain heading -->
+    <h1 class="curtain-heading" aria-label="Something Wonderful Is About to Open">
+      Something Wonderful<br>Is About to Open
+    </h1>
+
     <!-- Cut instruction -->
     <div class="cut-instruction" aria-live="polite">
-      <span>Drag across the thread to cut</span>
+      <span>Drag across to cut the thread</span>
+      <!-- Animated drag cue -->
+      <div class="drag-cue" aria-hidden="true">
+        <svg class="drag-cue-hand" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 11V6a2 2 0 0 0-4 0v1"/>
+          <path d="M14 10V4a2 2 0 0 0-4 0v6"/>
+          <path d="M10 10.5V6a2 2 0 0 0-4 0v8"/>
+          <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.5 0-3.5-.5-5.5-2.5L3.36 16.36a1.5 1.5 0 0 1 2.12-2.12L8 16.7"/>
+        </svg>
+      </div>
     </div>
   </section>
 
@@ -99,128 +113,31 @@
           <span class="countdown-value" id="countdown-minutes">--</span>
           <span class="countdown-label">Minutes</span>
         </div>
-      </div>
-
-      <!-- Scroll Down Indicator -->
-      <div class="scroll-prompt" id="scroll-prompt" aria-hidden="true">
-        <span class="scroll-prompt-text">Scroll to explore</span>
-        <div class="scroll-prompt-mouse">
-          <div class="scroll-prompt-wheel"></div>
+        <span class="countdown-separator">:</span>
+        <div class="countdown-unit">
+          <span class="countdown-value" id="countdown-seconds">--</span>
+          <span class="countdown-label">Seconds</span>
         </div>
       </div>
+
+      <div class="calendar-add-container">
+        <button class="calendar-add-btn" id="calendar-add-btn" type="button">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          Add to Calendar
+        </button>
+      </div>
+
+
 
       <div class="thread-node"></div>
     </section>
 
-    <!-- ============================================================
-         SCENE 4 — THE JOURNEY (Scrollytelling)
-         ============================================================ -->
-    <section id="scene-journey" aria-label="The Wonder Hub journey">
-      <div class="journey-header">
-        <h2>The Journey</h2>
-      </div>
 
-      <div class="journey-scroll">
-        <!-- Gold thread vertical line -->
-        <div class="journey-thread" aria-hidden="true">
-          <div class="journey-thread-line"></div>
-        </div>
-
-        <!-- Milestone 1: A Tradition Begins -->
-        <div class="journey-milestone" data-index="0">
-          <div class="journey-node" style="top: 15%;" aria-hidden="true"></div>
-          <div class="milestone-content">
-            <div class="milestone-illustration">
-              <svg viewBox="0 0 200 200" fill="none" stroke="#D9B872" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                <!-- Woman in saree -->
-                <circle cx="100" cy="45" r="12"/>
-                <path d="M88 57 C85 70, 80 90, 78 110 Q76 130, 85 155 L115 155 Q120 130, 118 110 C116 90, 111 70, 108 57"/>
-                <!-- Saree drape flowing -->
-                <path d="M78 80 C65 85, 55 95, 50 115 Q45 135, 55 155"/>
-                <path d="M75 90 C62 95, 52 105, 48 125 Q44 140, 52 158"/>
-                <!-- Arm with fabric -->
-                <path d="M88 70 C75 68, 60 72, 50 80 Q42 88, 40 100"/>
-                <path d="M40 100 C38 108, 42 115, 48 118"/>
-                <!-- Decorative border on saree -->
-                <path d="M80 150 C85 148, 90 150, 95 148 C100 150, 105 148, 110 150" stroke-dasharray="2 3"/>
-                <path d="M78 145 C83 143, 88 145, 93 143 C98 145, 103 143, 108 145" stroke-dasharray="2 3"/>
-              </svg>
-            </div>
-            <h3 class="milestone-label">A Tradition Begins</h3>
-            <p class="milestone-sublabel">Where the love for the saree was born — a thread connecting generations of grace</p>
-          </div>
-        </div>
-
-        <!-- Milestone 2: Creations Expand -->
-        <div class="journey-milestone" data-index="1">
-          <div class="journey-node" style="top: 50%;" aria-hidden="true"></div>
-          <div class="milestone-content">
-            <div class="milestone-illustration">
-              <svg viewBox="0 0 200 200" fill="none" stroke="#D9B872" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                <!-- Laptop -->
-                <rect x="25" y="45" width="90" height="60" rx="3"/>
-                <rect x="30" y="50" width="80" height="45" rx="1"/>
-                <!-- Screen content: shopping cart -->
-                <path d="M45 65 L55 65 L60 85 L80 85 L85 70 L60 70"/>
-                <circle cx="65" cy="90" r="2"/>
-                <circle cx="78" cy="90" r="2"/>
-                <!-- Laptop base -->
-                <path d="M20 105 L120 105 L115 110 L25 110 Z"/>
-                <!-- Jewelry items -->
-                <!-- Necklace -->
-                <path d="M145 50 C130 55, 125 70, 130 80 C135 90, 155 90, 160 80 C165 70, 160 55, 145 50"/>
-                <circle cx="145" cy="82" r="5"/>
-                <circle cx="145" cy="82" r="2"/>
-                <!-- Earring -->
-                <path d="M170 55 L170 65 L165 75 L175 75 L170 65"/>
-                <!-- Gift box -->
-                <rect x="130" y="105" width="45" height="35" rx="2"/>
-                <line x1="152" y1="105" x2="152" y2="140"/>
-                <path d="M130 115 L175 115"/>
-                <!-- Bow -->
-                <path d="M145 105 C142 100, 140 95, 145 93 C150 95, 148 100, 145 105"/>
-                <path d="M160 105 C157 100, 160 95, 165 93 C168 95, 163 100, 160 105"/>
-              </svg>
-            </div>
-            <h3 class="milestone-label">Creations Expand</h3>
-            <p class="milestone-sublabel">Beyond sarees — jewelry, gifts, and digital storefronts bringing creations to the world</p>
-          </div>
-        </div>
-
-        <!-- Milestone 3: The Hub Is Born -->
-        <div class="journey-milestone" data-index="2">
-          <div class="journey-node" style="top: 85%;" aria-hidden="true"></div>
-          <div class="milestone-content">
-            <div class="milestone-illustration">
-              <svg viewBox="0 0 200 200" fill="none" stroke="#D9B872" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                <!-- Glowing archway -->
-                <path d="M60 170 L60 70 Q60 30, 100 25 Q140 30, 140 70 L140 170"/>
-                <path d="M55 170 L55 68 Q55 25, 100 18 Q145 25, 145 68 L145 170"/>
-                <!-- Inner glow lines -->
-                <path d="M70 170 L70 75 Q70 40, 100 35 Q130 40, 130 75 L130 170" opacity="0.4"/>
-                <path d="M80 170 L80 80 Q80 50, 100 45 Q120 50, 120 80 L120 170" opacity="0.2"/>
-                <!-- Light rays from archway -->
-                <line x1="100" y1="30" x2="100" y2="5" stroke-dasharray="2 3" opacity="0.5"/>
-                <line x1="80" y1="35" x2="70" y2="10" stroke-dasharray="2 3" opacity="0.3"/>
-                <line x1="120" y1="35" x2="130" y2="10" stroke-dasharray="2 3" opacity="0.3"/>
-                <!-- Steps -->
-                <line x1="55" y1="170" x2="145" y2="170"/>
-                <line x1="50" y1="178" x2="150" y2="178"/>
-                <line x1="45" y1="186" x2="155" y2="186"/>
-                <!-- Sparkles around the arch -->
-                <circle cx="50" cy="50" r="1.5" opacity="0.6"/>
-                <circle cx="150" cy="50" r="1.5" opacity="0.6"/>
-                <circle cx="100" cy="10" r="2" opacity="0.8"/>
-                <circle cx="65" cy="25" r="1" opacity="0.4"/>
-                <circle cx="135" cy="25" r="1" opacity="0.4"/>
-              </svg>
-            </div>
-            <h3 class="milestone-label">The Hub Is Born</h3>
-            <p class="milestone-sublabel">Every thread, every dream, every connection leads here — welcome to Wonder Hub</p>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- ============================================================
          SCENE 5 — IDENTITY REVEAL
@@ -275,21 +192,161 @@
       
       <p class="social-subtext">Be the first through the door.</p>
 
-      <a href="#" class="instagram-btn" target="_blank" rel="noopener noreferrer" aria-label="Follow Wonder Hub on Instagram">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5" fill="none"/>
-          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/>
-          <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
-        </svg>
-        Follow on Instagram
-      </a>
+      <ul class="wrapper">
+        <li class="icon facebook">
+          <span class="tooltip">Facebook</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            height="1.2em"
+            viewBox="0 0 320 512"
+          >
+            <path
+              d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+            ></path>
+          </svg>
+        </li>
+        <li class="icon whatsapp">
+          <span class="tooltip">WhatsApp</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            height="1.2em"
+            viewBox="0 0 448 512"
+          >
+            <path
+              d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5.1-3.9-10.6-6.9z"
+            ></path>
+          </svg>
+        </li>
+        <li class="icon instagram">
+          <span class="tooltip">Instagram</span>
+          <svg
+            viewBox="0 0 16 16"
+            class="bi bi-instagram"
+            fill="currentColor"
+            height="1.2em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
+            ></path>
+          </svg>
+        </li>
+      </ul>
 
-      <div class="email-capture">
-        <p class="email-capture-label">Or be notified when we open our doors</p>
-        <form class="email-capture-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent = '✓ Noted'; this.querySelector('input').disabled = true;">
-          <input type="email" class="email-capture-input" placeholder="Your email address" required aria-label="Email address">
-          <button type="submit" class="email-capture-submit">Notify Me</button>
-        </form>
+      <!-- Grand Opening & Special Offers Section -->
+      <div class="offers-container">
+        <div class="offers-header">
+          <button class="offer-tab-btn active" data-target="opening-offers-pane">Grand Opening Specials</button>
+          <button class="offer-tab-btn" data-target="monthly-offers-pane">Monthly Pujo Savings</button>
+        </div>
+
+        <!-- Tab 1 Pane: Grand Opening Offers -->
+        <div class="offer-tab-pane active" id="opening-offers-pane">
+          <div class="offers-grid">
+            <!-- Offer 1 -->
+            <div class="offer-card">
+              <div class="offer-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="offer-badge">Flat 10% OFF</div>
+              <p class="offer-desc">on your first purchase</p>
+            </div>
+            <!-- Offer 2 (Highlight/Surprise Gift) -->
+            <div class="offer-card highlight">
+              <div class="offer-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7c-1.5-3-4.5-3-4.5 0s3 3 4.5 0zM12 7c1.5-3 4.5-3 4.5 0s-3 3-4.5 0z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="offer-badge">Free Surprise Gift</div>
+              <p class="offer-desc">on shopping above <strong>₹2,499</strong></p>
+            </div>
+            <!-- Offer 3 -->
+            <div class="offer-card">
+              <div class="offer-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="offer-badge">Free Gift</div>
+              <p class="offer-desc">for the first <strong>25 customers</strong></p>
+            </div>
+          </div>
+          <p class="offers-validity">Valid for the first 7 days only.</p>
+        </div>
+
+        <!-- Tab 2 Pane: Monthly Pujo Savings -->
+        <div class="offer-tab-pane" id="monthly-offers-pane">
+          <div class="monthly-promo-card">
+            <span class="promo-eyebrow">Every Month Till Durga Pujo</span>
+            <div class="promo-main">
+              <span class="promo-get">Get</span>
+              <span class="promo-amount">₹200 OFF</span>
+            </div>
+            <p class="promo-target">on eligible saree purchases</p>
+            <p class="promo-condition">During the last 5 days of every month!</p>
+          </div>
+
+          <!-- Calendar visual representation -->
+          <div class="calendar-visual">
+            <div class="calendar-info">
+              <span class="calendar-label">Offer Period</span>
+              <span class="calendar-dates">26th to Month End</span>
+            </div>
+            <div class="calendar-days-row">
+              <div class="calendar-day active">
+                <span class="cal-num">26</span>
+              </div>
+              <div class="calendar-day active">
+                <span class="cal-num">27</span>
+              </div>
+              <div class="calendar-day active">
+                <span class="cal-num">28</span>
+              </div>
+              <div class="calendar-day active">
+                <span class="cal-num">29</span>
+              </div>
+              <div class="calendar-day active">
+                <span class="cal-num">30/31</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature items grid -->
+          <div class="features-grid">
+            <div class="feature-item">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>New Collections Every Month</span>
+            </div>
+            <div class="feature-item">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Limited Time Offer</span>
+            </div>
+            <div class="feature-item">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Beautiful Sarees You'll Love</span>
+            </div>
+            <div class="feature-item">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Countdown to Pujo</span>
+            </div>
+          </div>
+          <p class="offers-validity">Mark your calendar and shop before the offer ends! ♡</p>
+        </div>
       </div>
 
       <footer class="footer-brand">

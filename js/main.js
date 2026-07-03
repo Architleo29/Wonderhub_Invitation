@@ -6,7 +6,7 @@ import { Rope } from './rope.js';
 import { Curtain } from './curtain.js';
 import { SpotlightReveal } from './spotlight.js';
 import { Countdown } from './countdown.js';
-import { Journey } from './journey.js';
+
 import { LogoReveal } from './logo-reveal.js';
 
 class WonderHubApp {
@@ -15,7 +15,7 @@ class WonderHubApp {
     this.curtain = null;
     this.spotlight = null;
     this.countdown = null;
-    this.journey = null;
+
     this.logoReveal = null;
     this.audio = null;
     this.isMuted = true;
@@ -36,6 +36,12 @@ class WonderHubApp {
 
     // Initialize audio (muted by default)
     this.initAudio();
+
+    // Initialize tab switching for offers
+    this.initTabs();
+
+    // Initialize calendar add button
+    this.initCalendarButton();
   }
 
   async preloadFonts() {
@@ -107,10 +113,7 @@ class WonderHubApp {
       this.countdown.start();
     }
 
-    // Initialize journey scrollytelling
-    setTimeout(() => {
-      this.journey = new Journey();
-    }, 2000);
+
 
     // Initialize logo reveal
     this.logoReveal = new LogoReveal();
@@ -124,7 +127,7 @@ class WonderHubApp {
       '#scene-announcement .announcement-script, ' +
       '#scene-announcement .announcement-date, ' +
       '#scene-announcement .countdown, ' +
-      '#scene-announcement .scroll-prompt'
+      '#scene-announcement .calendar-add-container'
     );
 
     elements.forEach(el => {
@@ -174,6 +177,59 @@ class WonderHubApp {
         <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2"/>
       `;
     }
+  }
+
+  initTabs() {
+    const tabs = document.querySelectorAll('.offer-tab-btn');
+    const panes = document.querySelectorAll('.offer-tab-pane');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        panes.forEach(p => p.classList.remove('active'));
+        
+        tab.classList.add('active');
+        const target = tab.dataset.target;
+        const targetPane = document.getElementById(target);
+        if (targetPane) {
+          targetPane.classList.add('active');
+        }
+      });
+    });
+  }
+
+  initCalendarButton() {
+    const btn = document.getElementById('calendar-add-btn');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const event = {
+        title: "Wonder Hub Grand Opening",
+        description: "Join us for the Grand Opening of Wonder Hub! Explore our exclusive collections of sarees, jewelry, and gifts. Flat 10% OFF on first purchase, Free Surprise Gift above 2,499, and Free Gift for the first 25 customers!",
+        location: "Near 6 No. Garia Bus Stand, Kolkata 700047",
+        startDate: "20260723T100000", // 10:00 AM Local
+        endDate: "20260723T200000"    // 8:00 PM
+      };
+      
+      const icsMsg = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "BEGIN:VEVENT",
+        `DTSTART:${event.startDate}`,
+        `DTEND:${event.endDate}`,
+        `SUMMARY:${event.title}`,
+        `DESCRIPTION:${event.description}`,
+        `LOCATION:${event.location}`,
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+      
+      const blob = new Blob([icsMsg], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'wonder-hub-opening.ics';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
   }
 }
 

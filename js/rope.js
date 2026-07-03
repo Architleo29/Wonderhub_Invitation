@@ -48,7 +48,7 @@ export class Rope {
 
   initPoints() {
     const cx = this.canvas.width / 2;
-    const startY = this.canvas.height * 0.15;
+    const startY = this.canvas.height * 0.28;
     const endY = this.canvas.height * 0.75;
     this.segmentLength = (endY - startY) / this.segments;
 
@@ -108,7 +108,7 @@ export class Rope {
 
     // Update cursor style based on proximity
     const cx = this.canvas.width / 2;
-    const ropeTop = this.canvas.height * 0.15;
+    const ropeTop = this.canvas.height * 0.28;
     const ropeBottom = this.canvas.height * 0.75;
     const nearRope = Math.abs(x - cx) < hitZoneWidth && y > ropeTop && y < ropeBottom;
     this.canvas.classList.toggle('cuttable', nearRope);
