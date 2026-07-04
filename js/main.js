@@ -72,6 +72,14 @@ class WonderHubApp {
     // Play cut sound effect hint
     this.playRevealSound();
 
+    // Make the audio button bounce if muted
+    if (this.isMuted) {
+      setTimeout(() => {
+        const toggle = document.querySelector('.audio-toggle');
+        if (toggle) toggle.classList.add('attention');
+      }, 1500);
+    }
+
     // Part the curtains
     this.curtain.part();
 
@@ -143,13 +151,15 @@ class WonderHubApp {
     if (!toggle) return;
 
     // Try to load the audio
-    this.audio = new Audio('ElevenLabs_Symphony_timpani_drum_roll.mp3');
-    this.audio.loop = false;
+    this.audio = new Audio('PikuSarodThemeRingtoneMp31640621143.mp3');
+    this.audio.loop = true;
     this.audio.volume = 0.3;
 
     toggle.addEventListener('click', () => {
       this.isMuted = !this.isMuted;
       this.updateAudioIcon(toggle);
+      
+      toggle.classList.remove('attention');
 
       if (!this.isMuted && this.audio) {
         this.audio.play().catch(() => { });
