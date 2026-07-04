@@ -204,7 +204,7 @@ class WonderHubApp {
       const event = {
         title: "Wonder Hub Grand Opening",
         description: "Join us for the Grand Opening of Wonder Hub! Explore our exclusive collections of sarees, jewelry, and gifts. Flat 10% OFF on first purchase, Free Surprise Gift above 2,499, and Free Gift for the first 25 customers!",
-        location: "Near 6 No. Garia Bus Stand, Kolkata 700047",
+        location: "Near 6 No. Garia Bus Stand (beside Sevangan Nursing Home), Kolkata 700047",
         startDate: "20260723T100000", // 10:00 AM Local
         endDate: "20260723T200000"    // 8:00 PM
       };
@@ -212,12 +212,18 @@ class WonderHubApp {
       const icsMsg = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
+        "PRODID:-//Wonder Hub//Grand Opening//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
         "BEGIN:VEVENT",
-        `DTSTART:${event.startDate}`,
-        `DTEND:${event.endDate}`,
+        `DTSTART;TZID=Asia/Kolkata:${event.startDate}`,
+        `DTEND;TZID=Asia/Kolkata:${event.endDate}`,
+        `DTSTAMP:${event.startDate}Z`,
+        `UID:wonderhub-grand-opening-2026@wonderhub.in`,
         `SUMMARY:${event.title}`,
         `DESCRIPTION:${event.description}`,
         `LOCATION:${event.location}`,
+        "STATUS:CONFIRMED",
         "END:VEVENT",
         "END:VCALENDAR"
       ].join("\r\n");
