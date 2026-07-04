@@ -329,7 +329,7 @@ export class Rope {
     // Main rope
     this.ctx.beginPath();
     this.ctx.strokeStyle = color;
-    this.ctx.lineWidth = 3;
+    this.ctx.lineWidth = 4;
     this.ctx.lineCap = 'round';
     this.ctx.moveTo(points[0].x, points[0].y);
     for (let i = 1; i < points.length; i++) {
@@ -339,6 +339,22 @@ export class Rope {
     }
     this.ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
     this.ctx.stroke();
+
+    // Rope twists (braid detail)
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = 'rgba(90, 60, 20, 0.4)';
+    this.ctx.lineWidth = 4;
+    this.ctx.lineCap = 'butt';
+    this.ctx.setLineDash([4, 4]);
+    this.ctx.moveTo(points[0].x, points[0].y);
+    for (let i = 1; i < points.length; i++) {
+      const xc = (points[i].x + points[i - 1].x) / 2;
+      const yc = (points[i].y + points[i - 1].y) / 2;
+      this.ctx.quadraticCurveTo(points[i - 1].x, points[i - 1].y, xc, yc);
+    }
+    this.ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+    this.ctx.stroke();
+    this.ctx.setLineDash([]);
 
     // Small knot at top
     if (points[0].pinned) {
