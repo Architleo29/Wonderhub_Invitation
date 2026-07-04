@@ -254,29 +254,28 @@ class WonderHubApp {
   initShareButton() {
     const shareBtn = document.getElementById('native-share-btn');
     if (!shareBtn) return;
-    shareBtn.addEventListener('click', async (e) => {
+    
+    // Preload the image as a blob so it downloads instantly on click
+    let preloadedBlobUrl = null;
+    fetch('Gemini_Generated_Image_pg1ke0pg1ke0pg1k-ezremove.png')
+      .then(res => res.blob())
+      .then(blob => { preloadedBlobUrl = URL.createObjectURL(blob); })
+      .catch(err => console.warn('Share image prefetch failed:', err));
+
+    shareBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      try {
-        const response = await fetch('Gemini_Generated_Image_pg1ke0pg1ke0pg1k-ezremove.png');
-        const blob = await response.blob();
-        const blobURL = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = blobURL;
-        link.download = 'WonderHub-Grand-Opening-Banner.png';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(blobURL);
-      } catch (error) {
-        console.error('Download failed, falling back:', error);
-        const link = document.createElement('a');
+      const link = document.createElement('a');
+      link.download = 'WonderHub-Grand-Opening-Banner.png';
+      if (preloadedBlobUrl) {
+        link.href = preloadedBlobUrl;
+      } else {
+        // Fallback if fetch failed or didn't finish
         link.href = 'Gemini_Generated_Image_pg1ke0pg1ke0pg1k-ezremove.png';
-        link.download = 'WonderHub-Grand-Opening-Banner.png';
         link.target = '_blank';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
       }
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     });
   }
 }
