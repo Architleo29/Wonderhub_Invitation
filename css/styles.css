@@ -1220,6 +1220,9 @@ body {
 .wrapper .instagram::before {
   background-color: #e4405f;
 }
+.wrapper .mail::before {
+  background-color: #ea4335;
+}
 
 .wrapper .facebook:hover .tooltip,
 .wrapper .facebook:hover .tooltip::before {
@@ -1236,6 +1239,12 @@ body {
 .wrapper .instagram:hover .tooltip,
 .wrapper .instagram:hover .tooltip::before {
   background: #e4405f;
+  color: #fff;
+}
+
+.wrapper .mail:hover .tooltip,
+.wrapper .mail:hover .tooltip::before {
+  background: #ea4335;
   color: #fff;
 }
 
@@ -1852,5 +1861,161 @@ body {
 
   .cal-num {
     font-size: 0.9rem;
+  }
+}
+
+/* ============================================================
+   BANNER SHARE & DOWNLOAD STYLING
+   ============================================================ */
+.banner-share-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: var(--space-xl) auto;
+  padding: var(--space-lg);
+  width: 90%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid var(--gold-dim);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(217, 184, 114, 0.05);
+  text-align: center;
+  z-index: 10;
+  position: relative;
+}
+
+.share-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--antique-gold);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-xs);
+  text-transform: uppercase;
+}
+
+.share-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--warm-ivory);
+  opacity: 0.85;
+  margin-bottom: var(--space-md);
+  line-height: 1.4;
+}
+
+.banner-preview-box {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1080/1350;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid rgba(217, 184, 114, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  margin: 0 auto var(--space-lg);
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.banner-preview-box:hover {
+  transform: translateY(-5px);
+  border-color: var(--antique-gold);
+}
+
+.banner-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.share-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.btn {
+  outline: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--brand-gradient);
+  min-width: 200px;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+  box-sizing: border-box;
+  padding: 16px 20px;
+  color: #fff;
+  font-family: var(--font-utility);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.4s ease;
+}
+
+.btn:hover {
+  opacity: .95;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(176, 58, 140, 0.4);
+}
+
+.btn svg {
+  transition: transform 0.3s ease;
+}
+
+.btn:hover svg {
+  transform: scale(1.15);
+}
+
+.btn .animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 100%;
+  animation: ripple 2s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
+  }
+
+  100% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-share-container {
+    padding: var(--space-md);
+    width: 92%;
+  }
+  .share-title {
+    font-size: 1.2rem;
+  }
+  .share-subtitle {
+    font-size: 0.95rem;
+  }
+  .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.8rem 1.2rem;
+  }
+  .share-actions {
+    flex-direction: column;
+    gap: var(--space-sm);
   }
 }
