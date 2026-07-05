@@ -53,26 +53,26 @@ class WonderHubApp {
   initScrollIndicator() {
     this.scrollIndicator = document.querySelector('.scroll-indicator');
     if (!this.scrollIndicator) return;
+    this.initialRevealScrollY = 0;
+    this.scrollIndicatorReadyToHide = false;
 
-    const hideIndicator = () => {
-      if (this.scrollIndicator) {
+    window.addEventListener('scroll', () => {
+      if (!this.scrollIndicatorReadyToHide) return;
+      
+      // Hide the indicator only if the user has scrolled a substantial amount (e.g. 250px)
+      // past the point where the automated scroll landed.
+      const hideThreshold = this.initialRevealScrollY + 250;
+      
+      if (window.scrollY > hideThreshold) {
         this.scrollIndicator.classList.add('hidden');
+      } else {
+        this.scrollIndicator.classList.remove('hidden');
       }
-      window.removeEventListener('wheel', hideIndicator);
-      window.removeEventListener('touchstart', hideIndicator);
-      window.removeEventListener('keydown', this.handleKeydownForScroll);
-    };
-
-    this.handleKeydownForScroll = (e) => {
-      if (['ArrowDown', 'ArrowUp', 'Space', 'PageDown', 'PageUp'].includes(e.code)) {
-        hideIndicator();
-      }
-    };
+    }, { passive: true });
 
     this.enableScrollIndicatorHiding = () => {
-      window.addEventListener('wheel', hideIndicator, { passive: true });
-      window.addEventListener('touchstart', hideIndicator, { passive: true });
-      window.addEventListener('keydown', this.handleKeydownForScroll, { passive: true });
+      this.initialRevealScrollY = window.scrollY;
+      this.scrollIndicatorReadyToHide = true;
     };
   }
 
