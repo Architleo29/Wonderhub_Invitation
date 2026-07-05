@@ -45,6 +45,22 @@ class WonderHubApp {
 
     // Initialize share button
     this.initShareButton();
+
+    // Initialize scroll indicator logic
+    this.initScrollIndicator();
+  }
+
+  initScrollIndicator() {
+    const indicator = document.querySelector('.scroll-indicator');
+    if (!indicator) return;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        indicator.classList.add('hidden');
+      } else {
+        indicator.classList.remove('hidden');
+      }
+    }, { passive: true });
   }
 
   async preloadFonts() {

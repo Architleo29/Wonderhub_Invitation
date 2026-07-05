@@ -1474,7 +1474,10 @@ body {
 
 /* Scroll Indicator */
 .scroll-indicator {
-  margin-top: 3rem;
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
   color: var(--antique-gold);
   animation: bounce 2s infinite;
   display: flex;
@@ -1482,6 +1485,13 @@ body {
   align-items: center;
   gap: 0.5rem;
   opacity: 0.9;
+  z-index: 50;
+  transition: opacity 0.5s ease;
+}
+
+.scroll-indicator.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .scroll-text {
@@ -1494,13 +1504,13 @@ body {
 
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
+    transform: translate(-50%, 0);
   }
   40% {
-    transform: translateY(-20px);
+    transform: translate(-50%, -20px);
   }
   60% {
-    transform: translateY(-10px);
+    transform: translate(-50%, -10px);
   }
 }
 
