@@ -53,10 +53,14 @@ class WonderHubApp {
   initScrollIndicator() {
     this.scrollIndicator = document.querySelector('.scroll-indicator');
     if (!this.scrollIndicator) return;
+    this.scrollIndicatorReadyToHide = false;
+    this.initialRevealScrollY = 0;
 
     window.addEventListener('scroll', () => {
-      if (!this.isContentRevealed) return;
-      if (window.scrollY > 50) {
+      if (!this.scrollIndicatorReadyToHide) return;
+      
+      // Hide the indicator only if the user scrolls 100px past the initial reveal position
+      if (window.scrollY > this.initialRevealScrollY + 100) {
         this.scrollIndicator.classList.add('hidden');
       } else {
         this.scrollIndicator.classList.remove('hidden');
@@ -152,8 +156,7 @@ class WonderHubApp {
 
     main.classList.add('visible');
     
-    this.isContentRevealed = true;
-    if (this.scrollIndicator && window.scrollY <= 50) {
+    if (this.scrollIndicator) {
       this.scrollIndicator.classList.remove('hidden');
     }
 
@@ -162,6 +165,12 @@ class WonderHubApp {
     if (announcement) {
       announcement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
+    // Wait for smooth scroll to finish before enabling hide logic
+    setTimeout(() => {
+      this.initialRevealScrollY = window.scrollY;
+      this.scrollIndicatorReadyToHide = true;
+    }, 1500);
 
     // Trigger announcement animations
     setTimeout(() => {
