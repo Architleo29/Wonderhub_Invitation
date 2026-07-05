@@ -1347,8 +1347,18 @@ body {
   color: var(--antique-gold);
   animation: bounce 2s infinite;
   display: flex;
-  justify-content: center;
-  opacity: 0.8;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.9;
+}
+
+.scroll-text {
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
 }
 
 @keyframes bounce {
@@ -1356,10 +1366,10 @@ body {
     transform: translateY(0);
   }
   40% {
-    transform: translateY(-15px);
+    transform: translateY(-20px);
   }
   60% {
-    transform: translateY(-7px);
+    transform: translateY(-10px);
   }
 }
 
