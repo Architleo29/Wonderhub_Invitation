@@ -1083,6 +1083,14 @@ body {
   100% { transform: translate(-50%, -114%); }
 }
 
+.map-pin-icon {
+  fill: #FF3B30;
+}
+
+.map-pin-shadow {
+  fill: #FFFFFF;
+}
+
 /* ============================================================
    SCENE 6 — SOCIAL FOOTER
    ============================================================ */
@@ -1141,7 +1149,8 @@ body {
 .wrapper .icon {
   position: relative;
   background: #fff;
-  color: #333;
+  color: #000; /* Replaced hardcoded inline style */
+  text-decoration: none; /* Replaced hardcoded inline style */
   border-radius: 50%;
   margin: 10px;
   width: 50px;
@@ -2055,4 +2064,40 @@ body {
     flex-direction: column;
     gap: var(--space-sm);
   }
+}
+
+/* ============================================================
+   STATE HANDLING (Loading & Disabled)
+   ============================================================ */
+button:disabled,
+.btn:disabled,
+.reveal-btn:disabled,
+.calendar-add-btn:disabled,
+.share-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.is-loading {
+  position: relative;
+  color: transparent !important;
+}
+
+.is-loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }

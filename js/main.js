@@ -83,6 +83,33 @@ class WonderHubApp {
     // Part the curtains
     this.curtain.part();
 
+    // Trigger celebration poppers
+    if (typeof confetti === 'function') {
+      const duration = 3000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: ['#D9B872', '#241B4E', '#FFF']
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: ['#D9B872', '#241B4E', '#FFF']
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+    }
+
     // Activate spotlights + particles after a brief delay
     setTimeout(() => {
       this.spotlight = new SpotlightReveal();
