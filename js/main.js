@@ -255,22 +255,22 @@ class WonderHubApp {
     const shareBtn = document.getElementById('native-share-btn');
     if (!shareBtn) return;
     
-    // Preload the image as a blob so it downloads instantly on click
+    // Preload the pdf as a blob so it downloads instantly on click
     let preloadedBlobUrl = null;
-    fetch('Gemini_Generated_Image_pg1ke0pg1ke0pg1k-ezremove.png')
+    fetch('grand opening online.pdf')
       .then(res => res.blob())
       .then(blob => { preloadedBlobUrl = URL.createObjectURL(blob); })
-      .catch(err => console.warn('Share image prefetch failed:', err));
+      .catch(err => console.warn('Share pdf prefetch failed:', err));
 
     shareBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const link = document.createElement('a');
-      link.download = 'WonderHub-Grand-Opening-Banner.png';
+      link.download = 'WonderHub-Grand-Opening.pdf';
       if (preloadedBlobUrl) {
         link.href = preloadedBlobUrl;
       } else {
         // Fallback if fetch failed or didn't finish
-        link.href = 'Gemini_Generated_Image_pg1ke0pg1ke0pg1k-ezremove.png';
+        link.href = 'grand opening online.pdf';
         link.target = '_blank';
       }
       document.body.appendChild(link);

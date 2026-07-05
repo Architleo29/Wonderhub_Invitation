@@ -72,6 +72,16 @@ export class Rope {
     this.canvas.addEventListener('mousemove', (e) => this.onPointerMove(e.clientX, e.clientY, hitZoneWidth));
     this.canvas.addEventListener('mouseup', () => this.onPointerUp());
 
+    // Keyboard events
+    this.canvas.addEventListener('keydown', (e) => {
+      if (this.cut) return;
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const midIndex = Math.floor(this.points.length / 2);
+        this.performCut(midIndex);
+      }
+    });
+
     // Touch events
     this.canvas.addEventListener('touchstart', (e) => {
       e.preventDefault();

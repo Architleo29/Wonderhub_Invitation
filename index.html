@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="css/styles.css?v=8">
 
   <!-- Preload Critical Assets for Slow Networks -->
-  <link rel="preload" as="image" href="wonderhub_logo_preview.png">
+  <link rel="preload" as="image" href="wonderhub_logo_preview.png" fetchpriority="high">
   <link rel="preload" as="audio" href="PikuSarodThemeRingtoneMp31640621143.mp3">
 
   <!-- Favicon (gold-on-indigo placeholder) -->
@@ -47,7 +47,7 @@
     </div>
 
     <!-- Rope (canvas-rendered) -->
-    <canvas id="rope-canvas" aria-hidden="true"></canvas>
+    <canvas id="rope-canvas" tabindex="0" aria-label="Press Enter or Space to cut the rope" role="button"></canvas>
 
     <!-- Curtain heading -->
     <h1 class="curtain-heading" aria-label="Something Wonderful Is About to Open">
@@ -155,7 +155,7 @@
         <img class="logo-image" 
              src="wonderhub_logo_preview.png" 
              alt="Wonder Hub — circular badge logo with Wh monogram, laurel wreath, and Love the Hub tagline"
-             width="400" height="400">
+             width="400" height="400" fetchpriority="high">
         <div class="logo-shimmer" aria-hidden="true"></div>
       </div>
 
@@ -243,26 +243,26 @@
               <div class="offer-badge">Flat 10% OFF</div>
               <p class="offer-desc">on your first purchase</p>
             </div>
-            <!-- Offer 2 (Highlight/Surprise Gift) -->
+            <!-- Offer 2 (Highlight) -->
             <div class="offer-card highlight">
               <div class="offer-icon">
-                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7c-1.5-3-4.5-3-4.5 0s3 3 4.5 0zM12 7c1.5-3 4.5-3 4.5 0s-3 3-4.5 0z" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                  <line x1="7" y1="7" x2="7.01" y2="7"/>
                 </svg>
               </div>
-              <div class="offer-badge">Free Surprise Gift</div>
-              <p class="offer-desc">on shopping above <strong>₹2,499</strong></p>
+              <div class="offer-badge">₹200 OFF</div>
+              <p class="offer-desc">on purchase above <strong>₹1,499</strong></p>
             </div>
             <!-- Offer 3 -->
             <div class="offer-card">
               <div class="offer-icon">
                 <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7c-1.5-3-4.5-3-4.5 0s3 3 4.5 0zM12 7c1.5-3 4.5-3 4.5 0s-3 3-4.5 0z" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
               <div class="offer-badge">Free Gift</div>
-              <p class="offer-desc">for the first <strong>25 customers</strong></p>
+              <p class="offer-desc">on purchase of <strong>₹2,499</strong> for first <strong>25 customers</strong></p>
             </div>
           </div>
           <p class="offers-validity">Valid for the first 7 days only.</p>
@@ -330,7 +330,7 @@
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>Countdown to Pujo</span>
+              <span>Countdown to Pujo with Wonderhub</span>
             </div>
           </div>
           <p class="offers-validity">Mark your calendar and shop before the offer ends! ♡</p>
