@@ -194,6 +194,18 @@ class WonderHubApp {
         this.audio.pause();
       }
     });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (this.audio) {
+          this.audio.pause();
+        }
+      } else {
+        if (!this.isMuted && this.audio) {
+          this.audio.play().catch(() => { });
+        }
+      }
+    });
   }
 
   playRevealSound() {
