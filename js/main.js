@@ -53,19 +53,27 @@ class WonderHubApp {
   initScrollIndicator() {
     this.scrollIndicator = document.querySelector('.scroll-indicator');
     if (!this.scrollIndicator) return;
-    this.scrollIndicatorReadyToHide = false;
-    this.initialRevealScrollY = 0;
 
-    window.addEventListener('scroll', () => {
-      if (!this.scrollIndicatorReadyToHide) return;
-      
-      // Hide the indicator only if the user scrolls 100px past the initial reveal position
-      if (window.scrollY > this.initialRevealScrollY + 100) {
+    const hideIndicator = () => {
+      if (this.scrollIndicator) {
         this.scrollIndicator.classList.add('hidden');
-      } else {
-        this.scrollIndicator.classList.remove('hidden');
       }
-    }, { passive: true });
+      window.removeEventListener('wheel', hideIndicator);
+      window.removeEventListener('touchstart', hideIndicator);
+      window.removeEventListener('keydown', this.handleKeydownForScroll);
+    };
+
+    this.handleKeydownForScroll = (e) => {
+      if (['ArrowDown', 'ArrowUp', 'Space', 'PageDown', 'PageUp'].includes(e.code)) {
+        hideIndicator();
+      }
+    };
+
+    this.enableScrollIndicatorHiding = () => {
+      window.addEventListener('wheel', hideIndicator, { passive: true });
+      window.addEventListener('touchstart', hideIndicator, { passive: true });
+      window.addEventListener('keydown', this.handleKeydownForScroll, { passive: true });
+    };
   }
 
   async preloadFonts() {
@@ -168,8 +176,9 @@ class WonderHubApp {
 
     // Wait for smooth scroll to finish before enabling hide logic
     setTimeout(() => {
-      this.initialRevealScrollY = window.scrollY;
-      this.scrollIndicatorReadyToHide = true;
+      if (this.enableScrollIndicatorHiding) {
+        this.enableScrollIndicatorHiding();
+      }
     }, 1500);
 
     // Trigger announcement animations
