@@ -1485,7 +1485,7 @@ body {
   align-items: center;
   gap: 0.5rem;
   opacity: 0.9;
-  z-index: 50;
+  z-index: 200;
   transition: opacity 0.5s ease;
 }
 
