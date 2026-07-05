@@ -51,14 +51,15 @@ class WonderHubApp {
   }
 
   initScrollIndicator() {
-    const indicator = document.querySelector('.scroll-indicator');
-    if (!indicator) return;
+    this.scrollIndicator = document.querySelector('.scroll-indicator');
+    if (!this.scrollIndicator) return;
 
     window.addEventListener('scroll', () => {
+      if (!this.isContentRevealed) return;
       if (window.scrollY > 50) {
-        indicator.classList.add('hidden');
+        this.scrollIndicator.classList.add('hidden');
       } else {
-        indicator.classList.remove('hidden');
+        this.scrollIndicator.classList.remove('hidden');
       }
     }, { passive: true });
   }
@@ -150,6 +151,11 @@ class WonderHubApp {
     if (!main) return;
 
     main.classList.add('visible');
+    
+    this.isContentRevealed = true;
+    if (this.scrollIndicator && window.scrollY <= 50) {
+      this.scrollIndicator.classList.remove('hidden');
+    }
 
     // Smooth scroll to announcement section so user is anchored correctly
     const announcement = document.getElementById('scene-announcement');
