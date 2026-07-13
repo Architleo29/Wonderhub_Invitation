@@ -48,6 +48,9 @@ class WonderHubApp {
 
     // Initialize scroll indicator logic
     this.initScrollIndicator();
+
+    // Lazy-load the Google Map when it scrolls into view
+    this.initLazyMap();
   }
 
   initScrollIndicator() {
@@ -215,6 +218,9 @@ class WonderHubApp {
   }
 
   scheduleAutoScroll() {
+    // Respect reduced-motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     // Wait 10 seconds after the main content is revealed, then auto-scroll to reveal section
     this.autoScrollTimer = setTimeout(() => {
       const target = document.getElementById('scene-logo');
@@ -420,6 +426,34 @@ class WonderHubApp {
       link.click();
       document.body.removeChild(link);
     });
+  }
+
+  initLazyMap() {
+    const container = document.getElementById('store-map-container');
+    if (!container || !container.dataset.mapSrc) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const iframe = document.createElement('iframe');
+          iframe.src = container.dataset.mapSrc;
+          iframe.width = '100%';
+          iframe.height = '100%';
+          iframe.allowFullscreen = true;
+          iframe.loading = 'lazy';
+          iframe.referrerPolicy = 'no-referrer-when-downgrade';
+
+          // Remove placeholder and insert iframe
+          const placeholder = container.querySelector('.map-placeholder');
+          if (placeholder) placeholder.remove();
+          container.insertBefore(iframe, container.firstChild);
+
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    observer.observe(container);
   }
 }
 
