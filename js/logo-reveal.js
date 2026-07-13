@@ -91,6 +91,9 @@ export class LogoReveal {
         this.storeDetails.classList.add('visible');
         this.storeDetails.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
+
+      // Signal that the full reveal is complete
+      document.dispatchEvent(new CustomEvent('logo-reveal-complete'));
     }, 4200);
 
     // Step 6: Second subtle particle burst

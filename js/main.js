@@ -191,10 +191,11 @@ class WonderHubApp {
       this.countdown.start();
     }
 
-
-
     // Initialize logo reveal
     this.logoReveal = new LogoReveal();
+
+    // Auto-scroll to the reveal section after 15 seconds
+    this.scheduleAutoScroll();
   }
 
   animateAnnouncement() {
@@ -211,6 +212,69 @@ class WonderHubApp {
     elements.forEach(el => {
       el.classList.add('animate-in');
     });
+  }
+
+  scheduleAutoScroll() {
+    // Wait 10 seconds after the main content is revealed, then auto-scroll to reveal section
+    this.autoScrollTimer = setTimeout(() => {
+      const target = document.getElementById('scene-logo');
+      if (!target) return;
+      const targetRect = target.getBoundingClientRect();
+      const targetY = window.scrollY + targetRect.top - (window.innerHeight / 4);
+      this.startAutoScroll(targetY);
+    }, 10000);
+
+    // After logo reveal completes, wait 10s then scroll to the bottom
+    document.addEventListener('logo-reveal-complete', () => {
+      setTimeout(() => {
+        const bottomY = document.documentElement.scrollHeight - window.innerHeight;
+        this.startAutoScroll(bottomY);
+      }, 10000);
+    }, { once: true });
+  }
+
+  startAutoScroll(targetY) {
+    const scrollSpeed = 1.2; // pixels per frame (~72px/s at 60fps) — a slow, cinematic pace
+    let cancelled = false;
+
+    // Cancel auto-scroll if the user interacts
+    const cancelAutoScroll = () => {
+      cancelled = true;
+      cleanup();
+    };
+
+    const cleanup = () => {
+      window.removeEventListener('wheel', cancelAutoScroll);
+      window.removeEventListener('touchstart', cancelAutoScroll);
+      window.removeEventListener('pointerdown', cancelAutoScroll);
+      window.removeEventListener('keydown', cancelAutoScroll);
+    };
+
+    window.addEventListener('wheel', cancelAutoScroll, { once: true, passive: true });
+    window.addEventListener('touchstart', cancelAutoScroll, { once: true, passive: true });
+    window.addEventListener('pointerdown', cancelAutoScroll, { once: true });
+    window.addEventListener('keydown', cancelAutoScroll, { once: true });
+
+    const step = () => {
+      if (cancelled) return;
+
+      const currentY = window.scrollY;
+
+      // Stop when we've reached or passed the target
+      if (currentY >= targetY - 1) {
+        cleanup();
+        return;
+      }
+
+      // Scroll by a small amount each frame
+      const remaining = targetY - currentY;
+      const delta = Math.max(scrollSpeed, remaining * 0.008); // ease-out: faster when far, min speed
+      window.scrollBy(0, delta);
+
+      requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
   }
 
   initAudio() {
