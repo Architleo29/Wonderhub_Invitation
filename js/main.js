@@ -221,21 +221,21 @@ class WonderHubApp {
     // Respect reduced-motion preference
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    // Wait 10 seconds after the main content is revealed, then auto-scroll to reveal section
+    // Wait 3 seconds after the main content is revealed, then auto-scroll to reveal section
     this.autoScrollTimer = setTimeout(() => {
       const target = document.getElementById('scene-logo');
       if (!target) return;
       const targetRect = target.getBoundingClientRect();
       const targetY = window.scrollY + targetRect.top - (window.innerHeight / 4);
       this.startAutoScroll(targetY);
-    }, 10000);
+    }, 3000);
 
-    // After logo reveal completes, wait 10s then scroll to the bottom
+    // After logo reveal completes, wait 3s then scroll to the bottom
     document.addEventListener('logo-reveal-complete', () => {
       setTimeout(() => {
         const bottomY = document.documentElement.scrollHeight - window.innerHeight;
         this.startAutoScroll(bottomY);
-      }, 10000);
+      }, 3000);
     }, { once: true });
   }
 
