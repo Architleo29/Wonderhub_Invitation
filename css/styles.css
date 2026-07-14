@@ -2303,6 +2303,92 @@ body {
 }
 
 /* ============================================================
+   LANGUAGE TOGGLE BAR
+   ============================================================ */
+.lang-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 24px;
+  background: rgba(21, 15, 48, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(217, 184, 114, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.lang-btn {
+  position: relative;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 20px;
+  background: transparent;
+  color: var(--gold-dim);
+  font-family: var(--font-utility);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: color 0.3s ease, background 0.3s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.lang-btn:hover {
+  color: var(--antique-gold);
+  transform: scale(1.05);
+}
+
+.lang-btn.active {
+  background: var(--antique-gold);
+  color: var(--twilight-indigo);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(217, 184, 114, 0.3);
+}
+
+.lang-btn.active:hover {
+  transform: scale(1);
+}
+
+/* Bengali font override when language is Bengali */
+html[lang="bn"] [data-i18n] {
+  font-family: 'Noto Sans Bengali', var(--font-body);
+}
+
+/* Keep display / heading fonts for Bengali headings */
+html[lang="bn"] .curtain-heading[data-i18n],
+html[lang="bn"] .announcement-headline[data-i18n] {
+  font-family: 'Noto Sans Bengali', var(--font-display);
+  font-weight: 600;
+}
+
+html[lang="bn"] .announcement-script[data-i18n] {
+  font-family: 'Noto Sans Bengali', var(--font-cursive);
+  font-weight: 500;
+}
+
+html[lang="bn"] .footer-brand-name[data-i18n] {
+  font-family: 'Noto Sans Bengali', var(--font-display);
+}
+
+/* Mobile adjustment */
+@media (max-width: 480px) {
+  .lang-toggle {
+    top: 10px;
+    right: 10px;
+  }
+
+  .lang-btn {
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+}
+
+/* ============================================================
    STATE HANDLING (Loading & Disabled)
    ============================================================ */
 button:disabled,

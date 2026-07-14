@@ -8,6 +8,7 @@ import { SpotlightReveal } from './spotlight.js';
 import { Countdown } from './countdown.js';
 
 import { LogoReveal } from './logo-reveal.js';
+import { I18n } from './i18n.js';
 
 class WonderHubApp {
   constructor() {
@@ -17,6 +18,7 @@ class WonderHubApp {
     this.countdown = null;
 
     this.logoReveal = null;
+    this.i18n = null;
     this.audio = null;
     this.isMuted = true;
 
@@ -48,6 +50,9 @@ class WonderHubApp {
 
     // Initialize scroll indicator logic
     this.initScrollIndicator();
+
+    // Initialize language toggle
+    this.i18n = new I18n();
 
     // Lazy-load the Google Map when it scrolls into view
     this.initLazyMap();

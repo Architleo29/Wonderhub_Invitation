@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wonder Hub — Grand Opening Soon</title>
   <meta name="description" content="A Journey From Sari to Many More. Wonder Hub — apparel, jewelry, gifts, and a vibrant community who loves the Hub. Grand Opening 23rd July 2026.">
+
+  <!-- Bengali Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Open Graph -->
   <meta property="og:title" content="Wonder Hub — Grand Opening Soon">
@@ -33,6 +36,14 @@
   <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
   <!-- ============================================================
+       LANGUAGE TOGGLE BAR
+       ============================================================ -->
+  <div class="lang-toggle" id="lang-toggle" role="radiogroup" aria-label="Language">
+    <button class="lang-btn active" id="lang-en" role="radio" aria-checked="true" type="button">EN</button>
+    <button class="lang-btn" id="lang-bn" role="radio" aria-checked="false" type="button">বাং</button>
+  </div>
+
+  <!-- ============================================================
        SCENE 1 — THE CURTAIN
        ============================================================ -->
   <section id="scene-curtain" aria-label="Curtain reveal">
@@ -56,13 +67,13 @@
     <canvas id="rope-canvas" tabindex="0" aria-label="Press Enter or Space to cut the rope" role="button"></canvas>
 
     <!-- Curtain heading -->
-    <h1 class="curtain-heading" aria-label="Something Wonderful Is About to Open">
+    <h1 class="curtain-heading" aria-label="Something Wonderful Is About to Open" data-i18n="curtain-heading">
       Something Wonderful<br>Is About to Open
     </h1>
 
     <!-- Cut instruction and fallback -->
     <div class="cut-instruction" aria-live="polite">
-      <span>Drag across to cut the thread</span>
+      <span data-i18n="cut-instruction">Drag across to cut the thread</span>
       <!-- Animated drag cue -->
       <div class="drag-cue" aria-hidden="true">
         <svg class="drag-cue-scissor" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -91,7 +102,7 @@
        MAIN CONTENT (revealed after curtain parts)
        ============================================================ -->
   <div class="scroll-indicator hidden" aria-hidden="true">
-    <span class="scroll-text">Scroll Down</span>
+    <span class="scroll-text" data-i18n="scroll-text">Scroll Down</span>
     <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
     </svg>
@@ -103,37 +114,37 @@
     <section id="scene-announcement" aria-label="Launch announcement">
       <div class="thread-node"></div>
 
-      <p class="announcement-eyebrow">Grand Opening Soon</p>
+      <p class="announcement-eyebrow" data-i18n="announcement-eyebrow">Grand Opening Soon</p>
 
-      <h1 class="announcement-headline">A Journey From Sari to Many More</h1>
+      <h1 class="announcement-headline" data-i18n="announcement-headline">A Journey From Sari to Many More</h1>
 
-      <p class="announcement-body">
+      <p class="announcement-body" data-i18n="announcement-body">
         One tradition, endlessly reimagined — apparel, jewelry, gifts, and a vibrant community who loves the Hub. Every thread you see brought us here to create a space for everyone ♡.
       </p>
 
-      <p class="announcement-script">Crafted with love, built for community.</p>
+      <p class="announcement-script" data-i18n="announcement-script">Crafted with love, built for community.</p>
 
-      <p class="announcement-date">Opening 23rd July 2026</p>
+      <p class="announcement-date" data-i18n="announcement-date">Opening 23rd July 2026</p>
 
       <div class="countdown" role="timer" aria-label="Countdown to opening day">
         <div class="countdown-unit">
           <span class="countdown-value" id="countdown-days">--</span>
-          <span class="countdown-label">Days</span>
+          <span class="countdown-label" data-i18n="countdown-days">Days</span>
         </div>
         <span class="countdown-separator">:</span>
         <div class="countdown-unit">
           <span class="countdown-value" id="countdown-hours">--</span>
-          <span class="countdown-label">Hours</span>
+          <span class="countdown-label" data-i18n="countdown-hours">Hours</span>
         </div>
         <span class="countdown-separator">:</span>
         <div class="countdown-unit">
           <span class="countdown-value" id="countdown-minutes">--</span>
-          <span class="countdown-label">Minutes</span>
+          <span class="countdown-label" data-i18n="countdown-minutes">Minutes</span>
         </div>
         <span class="countdown-separator">:</span>
         <div class="countdown-unit">
           <span class="countdown-value" id="countdown-seconds">--</span>
-          <span class="countdown-label">Seconds</span>
+          <span class="countdown-label" data-i18n="countdown-seconds">Seconds</span>
         </div>
       </div>
 
@@ -145,7 +156,7 @@
             <line x1="8" y1="2" x2="8" y2="6"/>
             <line x1="3" y1="10" x2="21" y2="10"/>
           </svg>
-          Add to Calendar
+          <span data-i18n="calendar-add-btn">Add to Calendar</span>
         </button>
       </div>
 
@@ -159,7 +170,7 @@
          ============================================================ -->
     <section id="scene-logo" aria-label="Brand identity reveal">
       <button class="reveal-btn" id="reveal-btn" type="button">
-        <strong>Click to Reveal Our Identity</strong>
+        <strong data-i18n="reveal-btn">Click to Reveal Our Identity</strong>
         <div id="container-stars">
           <div id="stars"></div>
         </div>
@@ -177,13 +188,13 @@
         <div class="logo-shimmer" aria-hidden="true"></div>
       </div>
 
-      <p class="logo-tagline">Love the Hub</p>
+      <p class="logo-tagline" data-i18n="logo-tagline">Love the Hub</p>
 
       <!-- Store Details & Experience Hook -->
       <div class="store-details" id="store-details">
-        <p class="store-hook">Experience the magic of handcrafted elegance</p>
-        <p class="store-location">Step into our brand-new store — <span>Near 6 No. Garia Bus Stand (beside Sevangan Nursing Home), Kol-700047</span></p>
-        <p class="store-hours">Open Daily: <span>10:00 AM – 8:00 PM</span></p>
+        <p class="store-hook" data-i18n="store-hook">Experience the magic of handcrafted elegance</p>
+        <p class="store-location" data-i18n="store-location">Step into our brand-new store — <span>Near 6 No. Garia Bus Stand (beside Sevangan Nursing Home), Kol-700047</span></p>
+        <p class="store-hours" data-i18n="store-hours">Open Daily: <span>10:00 AM – 8:00 PM</span></p>
 
         <!-- Google Map Location Embed -->
           <div class="store-map" id="store-map-container" 
@@ -210,9 +221,9 @@
          SCENE 6 — SOCIAL CONNECTION
          ============================================================ -->
     <section id="scene-social" aria-label="Connect with Wonder Hub">
-      <h2 class="social-heading">Follow the journey before it begins.</h2>
+      <h2 class="social-heading" data-i18n="social-heading">Follow the journey before it begins.</h2>
       
-      <p class="social-subtext">Be the first through the door.</p>
+      <p class="social-subtext" data-i18n="social-subtext">Be the first through the door.</p>
 
       <div class="wrapper">
         <a href="https://www.facebook.com/share/19Anf8ARHc/" target="_blank" rel="noopener noreferrer" class="icon facebook">
@@ -244,8 +255,8 @@
       <!-- Grand Opening & Special Offers Section -->
       <div class="offers-container">
         <div class="offers-header">
-          <button class="offer-tab-btn active" data-target="opening-offers-pane">Grand Opening Specials</button>
-          <button class="offer-tab-btn" data-target="monthly-offers-pane">Monthly Pujo Savings</button>
+          <button class="offer-tab-btn active" data-target="opening-offers-pane" data-i18n="tab-opening">Grand Opening Specials</button>
+          <button class="offer-tab-btn" data-target="monthly-offers-pane" data-i18n="tab-monthly">Monthly Pujo Savings</button>
         </div>
 
         <!-- Tab 1 Pane: Grand Opening Offers -->
@@ -258,8 +269,8 @@
                   <path d="M6 3h12"/><path d="M6 8h12"/><path d="M6 13h8.5l-1 1"/><path d="M6 13h3"/><path d="M9 13c6.667 0 6.667-10 0-10"/><path d="M6 13l7.5 8"/>
                 </svg>
               </div>
-              <div class="offer-badge">Flat 10% OFF</div>
-              <p class="offer-desc">on your first purchase</p>
+              <div class="offer-badge" data-i18n="offer-1-badge">Flat 10% OFF</div>
+              <p class="offer-desc" data-i18n="offer-1-desc">on your first purchase</p>
             </div>
             <!-- Offer 2 (Highlight) -->
             <div class="offer-card highlight">
@@ -269,8 +280,8 @@
                   <line x1="7" y1="7" x2="7.01" y2="7"/>
                 </svg>
               </div>
-              <div class="offer-badge">₹200 OFF</div>
-              <p class="offer-desc">on purchase above <strong>₹1,499</strong></p>
+              <div class="offer-badge" data-i18n="offer-2-badge">₹200 OFF</div>
+              <p class="offer-desc" data-i18n="offer-2-desc">on purchase above <strong>₹1,499</strong></p>
             </div>
             <!-- Offer 3 -->
             <div class="offer-card">
@@ -279,8 +290,8 @@
                   <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7c-1.5-3-4.5-3-4.5 0s3 3 4.5 0zM12 7c1.5-3 4.5-3 4.5 0s-3 3-4.5 0z" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <div class="offer-badge">Free Gift</div>
-              <p class="offer-desc">on purchase of <strong>₹2,499</strong> for first <strong>25 customers</strong></p>
+              <div class="offer-badge" data-i18n="offer-3-badge">Free Gift</div>
+              <p class="offer-desc" data-i18n="offer-3-desc">on purchase of <strong>₹2,499</strong> for first <strong>25 customers</strong></p>
             </div>
           </div>
         </div>
@@ -288,20 +299,20 @@
         <!-- Tab 2 Pane: Monthly Pujo Savings -->
         <div class="offer-tab-pane" id="monthly-offers-pane">
           <div class="monthly-promo-card">
-            <span class="promo-eyebrow">Every Month Till Durga Pujo</span>
+            <span class="promo-eyebrow" data-i18n="promo-eyebrow">Every Month Till Durga Pujo</span>
             <div class="promo-main">
-              <span class="promo-get">Get</span>
-              <span class="promo-amount">₹200 OFF</span>
+              <span class="promo-get" data-i18n="promo-get">Get</span>
+              <span class="promo-amount" data-i18n="promo-amount">₹200 OFF</span>
             </div>
-            <p class="promo-target">on eligible saree purchases</p>
-            <p class="promo-condition">During the last 5 days of every month!</p>
+            <p class="promo-target" data-i18n="promo-target">on eligible saree purchases</p>
+            <p class="promo-condition" data-i18n="promo-condition">During the last 5 days of every month!</p>
           </div>
 
           <!-- Calendar visual representation -->
           <div class="calendar-visual">
             <div class="calendar-info">
-              <span class="calendar-label">Offer Period</span>
-              <span class="calendar-dates">26th to Month End</span>
+              <span class="calendar-label" data-i18n="calendar-label">Offer Period</span>
+              <span class="calendar-dates" data-i18n="calendar-dates">26th to Month End</span>
             </div>
             <div class="calendar-days-row">
               <div class="calendar-day active">
@@ -328,35 +339,35 @@
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>New Collections Every Month</span>
+              <span data-i18n="feature-1">New Collections Every Month</span>
             </div>
             <div class="feature-item">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
                 <circle cx="12" cy="12" r="10"/>
                 <path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>Limited Time Offer</span>
+              <span data-i18n="feature-2">Limited Time Offer</span>
             </div>
             <div class="feature-item">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>Beautiful Sarees You'll Love</span>
+              <span data-i18n="feature-3">Beautiful Sarees You'll Love</span>
             </div>
             <div class="feature-item">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>Countdown to Pujo with Wonderhub</span>
+              <span data-i18n="feature-4">Countdown to Pujo with Wonderhub</span>
             </div>
           </div>
-          <p class="offers-validity">Mark your calendar and shop before the offer ends! ♡</p>
+          <p class="offers-validity" data-i18n="offers-validity">Mark your calendar and shop before the offer ends! ♡</p>
         </div>
       </div>
       <!-- Banner Share Section -->
       <div class="banner-share-container">
-        <h3 class="share-title">Share the Joy</h3>
-        <p class="share-subtitle">Invite the people who make celebrations mean more</p>
+        <h3 class="share-title" data-i18n="share-title">Share the Joy</h3>
+        <p class="share-subtitle" data-i18n="share-subtitle">Invite the people who make celebrations mean more</p>
         <div class="share-actions">
           <button class="btn share-btn" id="native-share-btn" type="button">
             <span style="display: inline-flex; align-items: center; gap: 8px;">
@@ -367,7 +378,7 @@
                 <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
                 <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
               </svg>
-              Share with your close ones
+              <span data-i18n="share-btn">Share with your close ones</span>
             </span>
             <div class="animation"></div>
           </button>
@@ -375,7 +386,7 @@
       </div>
 
       <footer class="footer-brand">
-        <p class="footer-brand-name">Wonder Hub</p>
+        <p class="footer-brand-name" data-i18n="footer-brand">Wonder Hub</p>
       </footer>
     </section>
   </main>
